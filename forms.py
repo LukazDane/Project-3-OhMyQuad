@@ -3,8 +3,8 @@ from wtforms import TextField, TextAreaField, SubmitField
 
 
 
-class PostForm(Form):
+class WorkoutForm(Form):
   user = TextField("By:")
   title = TextField("Title")
   text = TextAreaField("Content")
-  submit = SubmitField('Create Post')
+  submit = SubmitField('Create Workout')

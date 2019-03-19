@@ -1,0 +1,12 @@
+div {
+  border: 1px solid black;
+}
+.column {
+  text-align: center;
+}
+.content-container {
+  width: 95vw;
+  height: 95vh;
+  background-color: red;
+  font-size: 2rem;
+}
