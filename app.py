@@ -1,16 +1,15 @@
-from flask import render_template, flash, redirect, url_for
-#from forms import SubForm, PostForm, CommentForm
-#This import makes our connection to the models
+from flask import Flask, g
 import models
+
 
 DEBUG = True
 PORT = 8000
 
 app = Flask(__name__)
-app.secret_key = 'dev'
+app.secret_key = 'adkjfalj.adflja.dfnasdf.asd'
+ 
 
-
-# Handle requests when the come in (before) and when they complete (after)
+  # Handle requests when the come in (before) and when they complete (after)
 @app.before_request
 def before_request():
     """Connect to the DB before each request."""
@@ -18,7 +17,7 @@ def before_request():
     g.db.connect()
 
 @app.after_request
-def after_request(response):
+def after_request():
     """Close the database connection after each request."""
     g.db.close()
     return response
@@ -35,6 +34,15 @@ def about():
 def login():
     return 'Login Page!'
 
+
+  # The root route will revert back to a simpler version that just returns some text
+
+
+  # ...
+    
+    
+    
+    
 
 
 
