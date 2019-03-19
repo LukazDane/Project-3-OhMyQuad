@@ -8,19 +8,33 @@ from flask_bcrypt import generate_password_hash
 
 DATABASE = SqliteDatabase('ohmyquad.db')
 
-
-
-class User(Model):
-  name = CharField()
-  timestamp = DateTimeField(default=datetime.datetime.now)
-  #relate the post to the sub model
+class User(UserMixin, Model):
+    username = CharField(unique=True)
+    email = CharField(unique=True)
+    password = CharField(max_length=100)
+    joined_at = DateTimeField(default=datetime.datetime.now)
   
+    class Meta:
+      database = DATABASE
+      order_by = ('-timestamp',)
+    
+    #  function that creates a new user
+    @classmethod
+    def create_user(cls, username, email , password):
+        try:
+            cls.create(
+                username = username,
+                email = email,
+                password = generate_password_hash(password),
+            )
+        except IntegrityError:
+            raise ValueError("User already exists")
 
 
 
-  class Meta:
-    database = DATABASE
-    order_by = ('-timestamp',)
+
+
+
 
 
 class Workout(Model):
