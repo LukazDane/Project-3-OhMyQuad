@@ -50,7 +50,11 @@ def register():
         models.User.create_user(  # calling the create_user function from the user model and passing in the form data
             username = form.username.data,
             email = form.email.data,
-            password = form.password.data
+            password = form.password.data,
+            name = form.name.data,
+            height = form.height.data,
+            weight = form.weight.data,
+            goal = form.goal.data
             )
         return redirect(url_for('index')) # once the submissin is succesful, user is redirected to the index function which routes back to the home page
     return render_template('register.html', form=form)
@@ -88,10 +92,10 @@ def about():
     return 'About Page!'
 
 
-  # The root route will revert back to a simpler version that just returns some text
+# The root route will revert back to a simpler version that just returns some text
 
 
-  # ...
+# ...
 if __name__ == '__main__':
-  models.initialize()
-  app.run(debug=DEBUG, port=PORT)
+    models.initialize()
+    app.run(debug=DEBUG, port=PORT)
