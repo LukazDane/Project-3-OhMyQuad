@@ -1,14 +1,14 @@
 {% extends "layout.html" %} {% block body %}
-<h2>Login</h2>
-{% if error %}
-<p class="error"><strong>Error:</strong> {{ error }}{% endif %}</p>
-<form action="{{ url_for('login') }}" method="post">
-  <dl>
-    <dt>Username:</dt>
-    <dd><input type="text" name="username" /></dd>
-    <dt>Password:</dt>
-    <dd><input type="password" name="password" /></dd>
-    <dd><input type="submit" value="Login" /></dd>
-  </dl>
+<form method="POST" action="" class="form">
+  {{ form.hidden_tag() }}
+  {% for field in form %}
+  <div class="field">
+    {% if field.errors %} {% for error in field.errors %}
+    <div class="notification error">{{ error }}</div>
+    {% endfor %} {% endif %}
+    {{ field(placeholder=field.label.text) }}
+  </div>
+  {% endfor %}
+  <button type="submit" id="submit">Login!</button>
 </form>
 {% endblock %}
