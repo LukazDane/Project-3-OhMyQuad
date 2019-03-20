@@ -1,6 +1,6 @@
 from flask import Flask, g
-from flask import render_template, flash, redirect, url_for, session
-
+from flask import render_template, flash, redirect, url_for, session, request, abort 
+from flask import make_response as response
 from forms import WorkoutForm
 import models
 
@@ -13,17 +13,17 @@ app.secret_key = 'dev'
  
 
   # Handle requests when the come in (before) and when they complete (after)
-# @app.before_request
-# def before_request():
-#     # """Connect to the DB before each request."""
-#     g.db = models.DATABASE
-#     g.db.connect()
+@app.before_request
+def before_request():
+    # """Connect to the DB before each request."""
+    g.db = models.DATABASE
+    g.db.connect()
 
-# @app.after_request
-# def after_request():
-#     # """Close the database connection after each request."""
-#     g.db.close()
-#     return response
+@app.after_request
+def after_request(error):
+    # """Close the database connection after each request."""
+    g.db.close()
+    return response
 
 @app.route("/")
 def index(name=None):
