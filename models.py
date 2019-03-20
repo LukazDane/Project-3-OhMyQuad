@@ -14,6 +14,10 @@ class User(UserMixin, Model):
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField(max_length=100)
+    name = CharField()
+    height = IntegerField()
+    weight = IntegerField()
+    goal = CharField(max_length=100)
     joined_at = DateTimeField(default=datetime.datetime.now)
   
     class Meta:
@@ -22,12 +26,16 @@ class User(UserMixin, Model):
     
     #  function that creates a new user
     @classmethod
-    def create_user(cls, username, email , password):
+    def create_user(cls, username, email , password, name, height, weight, goal):
         try:
             cls.create(
                 username = username,
                 email = email,
-                password = generate_password_hash(password)
+                password = generate_password_hash(password),
+                name = name,
+                height = height,
+                weight = weight,
+                goal = goal
             )
         except IntegrityError:
             raise ValueError("User already exists")
