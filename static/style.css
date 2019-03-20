@@ -1,5 +1,7 @@
-div {
-  /* border: 1px solid black; */
+/* div { */
+/* border: 1px solid black; */
+* {
+  box-shadow: border-box;
 }
 
 .return {
@@ -27,16 +29,18 @@ div {
   background-color: rgba(100, 100, 100, 0.5);
 }
 .content-container {
-  width: 95vw;
-  height: 95vh;
   background-color: rgba(255, 0, 0, 0.5);
   font-size: 2rem;
+  margin-bottom: 2rem;
 }
 
 footer {
   padding: 0 !important;
   background-color: black !important;
   color: white !important;
+  position: absolute;
+  left: 0;
+  right: 0;
 }
 
 @keyframes wiggle {
