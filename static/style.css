@@ -1,0 +1,18 @@
+div {
+  border: 1px solid black;
+}
+.column {
+  text-align: center;
+}
+.content-container {
+  width: 95vw;
+  height: 95vh;
+  font-size: 2rem;
+}
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}

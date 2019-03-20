@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+    <h1>Welcome Back</h1>
+    <article class="message is-dark">
+        <div class="message-header">
+            <a>{{user.name}}</a>
+        </div>
+        <div class="message-body">
+            {{user.location}}
+        </div>
+    </article>
+
+    {% if workouts %}
+    <h1>Workout List</h1>
+    {% for workout in workouts %}
+    <article class="message is-primary">
+        <div class="message-header">
+
+            
+            <p>By: {{workout.name}}</p>
+        </div>
+        <div class="message-body">
+            {{workout.description}}
+        </div>
+    </article>
+    {% endfor %}
+  {% endif %}
+
+    <section>
+        <h2>Add a Post to this Sub</h2>
+        <form method="POST" action="" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="field">
+            {{ form.name.label }}
+            {{ form.name(class_="input") }}
+            </div>
+            <div class="field">
+            {{ form.description.label }}
+            {{ form.description(class_="textarea") }}
+            </div>
+
+            {{ form.submit(class_="button") }}
+        </form>
+    </section>
+
+{% endblock %}
