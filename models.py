@@ -9,6 +9,8 @@ from flask_bcrypt import generate_password_hash
 DATABASE = SqliteDatabase('ohmyquad.db')
 
 class User(UserMixin, Model):
+    __table_args__ = {'extend_existing': True} 
+    
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField(max_length=100)
@@ -25,7 +27,7 @@ class User(UserMixin, Model):
             cls.create(
                 username = username,
                 email = email,
-                password = generate_password_hash(password),
+                password = generate_password_hash(password)
             )
         except IntegrityError:
             raise ValueError("User already exists")
