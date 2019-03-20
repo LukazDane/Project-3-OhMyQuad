@@ -22,14 +22,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-      <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-        <a href="/"><p class="return">Oh My Quad!</p></a>
-        <div class="col">
+      <nav class="navbar is-dark columns" role="navigation" aria-label="main navigation">
+        <a href="/" class="column is-three-quarters"><p class="return">Oh My Quad!</p></a>
+        <div class="column is-one-quarter">
           {% if current_user.is_authenticated %}
-                  <a href="{{url_for('logout')}}" title="logout">Logout</a>
-                  {% else %}
-                  <a href="{{url_for('login')}}" title="login">Login</a>
-                  <a href="{{url_for('register')}}" title="register">register</a>
+                 <ul>
+                    <li><span aria-haspopup="true" aria-controls="dropdown-menu"><i class="far fa-user-circle"></i></span>
+                        </span>
+                    <ul>        
+                      <li><a href="{{url_for('logout')}}" title="logout" class="dropdown-item">Logout</a></li>
+                      <li><a href="/" class="dropdown-item">
+                            Donate
+                        </a></li>
+                      <li><a href="{{url_for('profile')}}" class="dropdown-item">
+                            Profile
+                        </a></li>
+                      <li><a href="{{url_for('about')}}" class="dropdown-item">
+                            About
+                        </a></li>
+                    </ul>
+                </li>
+                    </ul>
+                    {% else %}
+                  <a href="{{url_for('login')}}" title="login"><p>Login</p></a>
+                  <a href="{{url_for('register')}}" title="register"><p>register</p></a>
           {% endif %}
           
         </div>
