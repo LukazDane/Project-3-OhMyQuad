@@ -1,10 +1,16 @@
 from flask_wtf import FlaskForm as Form
 from wtforms import TextField, TextAreaField, SubmitField
 
-
-
-class PostForm(Form):
-  user = TextField("By:")
-  title = TextField("Title")
-  text = TextAreaField("Content")
+class WorkoutForm(Form):
+  name = TextField("Title")
+  description = TextField("steps")
   submit = SubmitField('Create Post')
+
+  
+
+
+
+
+
+
+
