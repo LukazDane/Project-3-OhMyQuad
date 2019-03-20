@@ -1,0 +1,23 @@
+{% block content %}
+  <h1>Today's Agenda</h1>
+  
+  <div class="columns">
+    <div class="column">
+      <h2>Add a New Workout</h2>
+      <form method="POST" action="" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="field">
+          {{ form.name.label }}
+          {{ form.name(class_="input") }}
+        </div>
+        <div class="field">
+          {{ form.description.label }}
+          {{ form.description(class_="textarea") }}
+        </div>
+
+        {{ form.submit(class_="button") }}
+      </form>
+    </div>
+  </div>
+{% endblock %}
