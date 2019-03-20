@@ -2,35 +2,63 @@
 <html>
   <head>
     <title>Oh My Quad</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    />
 
     <link
       rel="stylesheet"
       type="text/css"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
+    />
     <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-      <nav class="navbar is-dark" role="navigation" aria-label="main navigation"></nav>
-    <div class="main" style="padding: 0 20px">
-        <h1>Templates work!</h1>
-        <div class="content-container">
-            <p>this area will contain the main content of the page</p>
-            {% block content %}
-            {% endblock %}
-            <p>Continued</p>
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+      <a href="#"><p class="return">Oh My Quad!</p></a>
+
+      <!-- modal attempt -->
+      <!-- <div class="modal is-active is-clipped">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <-- Any other Bulma elements you want -->
         </div>
-        <footer class="footer is-dark columns">
-            <div class="column personal-link">
-                <a href="#"><i class="fas fa-cog"></i></a><p>Leo</p></div>
-            <div class="column personal-link">
-                <a href="#"><i class="fas fa-cog"></i></a><p>Luke</p></div>
-            <div class="column personal-link">
-                <a href="#"><i class="fas fa-cog"></i></a><p>Tristen</p></div>
-        </footer>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div> -->
+      <!-- end modal -->
+    </nav>
+    <div class="main" style="padding: 0 20px">
+      <h1>Templates work!</h1>
+      <div class="content-container">
+        {% block body %} {% if not session.logged_in %}
+        <a href="{{ url_for('login') }}">log in</a>
+        {% else %}
+        <a href="{{ url_for('logout') }}">log out</a>
+        {% endif %}
+      </div>
+      {% endblock %}
+    </div>
+    <footer class="footer is-dark columns">
+      <div class="column personal-link">
+        <a href="#"><i class="fas fa-cog"></i></a>
+        <p>Leo</p>
+      </div>
+      <div class="column personal-link">
+        <a href="#"><i class="fas fa-cog"></i></a>
+        <p>Luke</p>
+      </div>
+      <div class="column personal-link">
+        <a href="#"><i class="fas fa-cog"></i></a>
+        <p>Tristen</p>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,5 +1,5 @@
 from flask import Flask, g
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session
 
 from forms import WorkoutForm
 import models
@@ -29,15 +29,34 @@ app.secret_key = 'dev'
 def index(name=None):
     return render_template('layout.html',title="Dashboard", name=name)
 
+@app.route("/profile")
+def profile(name=None):
+    return render_template('profile.html',title="Dashboard", name=name)
+
 @app.route("/about")
-def about():
-    return 'About Page!'
+def about(name=None):
+    return render_template('about.html',title="About Us", name=name)
 
-@app.route("/login")
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return 'Login Page!'
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != app.config['USERNAME']:
+            error = 'Invalid username'
+        elif request.form['password'] != app.config['PASSWORD']:
+            error = 'Invalid password'
+        else:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('index'))
+    return render_template('login.html', error=error)
 
 
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    flash('You were logged out')
+    return redirect(url_for('index'))
   # The root route will revert back to a simpler version that just returns some text
 
 
