@@ -1,4 +1,33 @@
 {% extends "layout.html" %} {% block body %}
-<h1>Profile</h1>
 
-{% endblock %}
+<div class="columns">
+  <div class="column is-one-quarter user">
+    <img class="prof-img-a" src="/static/default.jpg" />
+    <h1>{{ current_user.username }}</h1>
+    <hr />
+    <div class="stats-container">
+      <p class="stats">Height:</p>
+      <p class="stats">Weight:</p>
+      <p class="stats">Goal Weight:</p>
+      <p class="stats">About me:</p>
+      <p class="stats">Join Date:</p>
+    </div>
+  </div>
+  <div class="column is-three-quarters">
+    <h1>Your Workouts</h1>
+    <hr />
+    {% for workout in workouts %}
+    <div class="workout">
+      <div class="workout-title">Title</div>
+      <div>
+        <p>Exercises:</p>
+        <button type="submit" name="add an exercise">+</button>
+      </div>
+      {%else %}
+      <div class="workout">You have no workouts to display</div>
+      {% endfor %}
+      <div><button class="add" type="submit">+</button></div>
+    </div>
+    {% endblock %}
+  </div>
+</div>

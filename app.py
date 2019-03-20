@@ -41,9 +41,13 @@ def after_request(response):
 
 @app.route("/")
 def index(name=None):
-    return render_template('layout.html',title="Dashboard", name=name)
+  if 'auth_token' in session:
+    return render_template('profile.html',title="Dashboard", name=name)
+  else: 
+    return render_template('landing.html',title="Dashboard", name=name)
 
 @app.route("/profile")
+@login_required
 def profile(name=None):
     return render_template('profile.html',title="Dashboard", name=name)
 
