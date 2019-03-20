@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <form method="POST" action="" class="form">
     {{ form.hidden_tag() }}
     {% for field in form %}
@@ -12,3 +13,19 @@
     {% endfor %}
     <button type="submit" id="submit">Login!</button>
 </form>
+=======
+{% extends "layout.html" %} {% block body %}
+<form method="POST" action="" class="form">
+  {{ form.hidden_tag() }}
+  {% for field in form %}
+  <div class="field">
+    {% if field.errors %} {% for error in field.errors %}
+    <div class="notification error">{{ error }}</div>
+    {% endfor %} {% endif %}
+    {{ field(placeholder=field.label.text) }}
+  </div>
+  {% endfor %}
+  <button type="submit" id="submit">Login!</button>
+</form>
+{% endblock %}
+>>>>>>> e7e0b586159fe2b44e53ade2941b9621a5b9b835

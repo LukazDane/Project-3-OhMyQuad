@@ -8,12 +8,18 @@ from flask_bcrypt import generate_password_hash
 
 DATABASE = SqliteDatabase('ohmyquad.db')
 
+
+
 class User(UserMixin, Model):
     __table_args__ = {'extend_existing': True} 
     
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField(max_length=100)
+    name = CharField()
+    height = IntegerField()
+    weight = IntegerField()
+    goal = CharField(max_length=100)
     joined_at = DateTimeField(default=datetime.datetime.now)
   
     class Meta:
@@ -22,12 +28,16 @@ class User(UserMixin, Model):
     
     #  function that creates a new user
     @classmethod
-    def create_user(cls, username, email , password):
+    def create_user(cls, username, email , password, name, height, weight, goal):
         try:
             cls.create(
                 username = username,
                 email = email,
-                password = generate_password_hash(password)
+                password = generate_password_hash(password),
+                name = name,
+                height = height,
+                weight = weight,
+                goal = goal
             )
         except IntegrityError:
             raise ValueError("User already exists")
@@ -37,10 +47,9 @@ class User(UserMixin, Model):
 
 
 
-
-
 class Workout(Model):
   name = CharField()
+  description = TextField()
   timestamp = DateTimeField(default=datetime.datetime.now)
   #relate the post to the sub model
   user = ForeignKeyField(User, backref="workouts") 
@@ -54,9 +63,9 @@ class Workout(Model):
 
 class Exercise(Model):
     name=CharField()
+    description=TextField()
     reps=IntegerField()
     sets=IntegerField()
-    description=TextField()
     type=CharField()
 
     class Meta:

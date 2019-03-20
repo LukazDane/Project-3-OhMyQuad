@@ -1,11 +1,13 @@
-
 from flask import Flask, g
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session, request, abort 
+from flask import make_response as response
+from forms import WorkoutForm
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
 
-import forms
+import forms 
 import models
+
 
 
 DEBUG = True
@@ -23,7 +25,7 @@ def load_user(userid):
     try:
         return models.User.get(models.User.id == userid)
     except models.DoesNotExist:
-        return none
+        return None
 
 # Handle requests when the come in (before) and when they complete (after)
 @app.before_request
@@ -52,9 +54,13 @@ def register():
         models.User.create_user(  # calling the create_user function from the user model and passing in the form data
             username = form.username.data,
             email = form.email.data,
-            password = form.password.data
+            password = form.password.data,
+            name = form.name.data,
+            height = form.height.data,
+            weight = form.weight.data,
+            goal = form.goal.data
             )
-        return redirect(url_for('index')) # once the submissin is succesful, user is redirected to the index function which routes back to the home page
+        return redirect('/login') # once the submissin is succesful, user is redirected to the index function which routes back to the home page
     return render_template('register.html', form=form)
 
 
@@ -71,11 +77,11 @@ def login():
                 ## creates session
                 login_user(user) # this method comes from the flask_login package
                 flash("You've been logged in", "success")
-                return redirect("/profile")
+                return redirect('/profile')
             else:
                 flash("your email or password doesn't match", "error")
+    
     return render_template('login.html', form=form)
-
 
 @app.route('/logout')
 @login_required # defines whatever routes and functions are avail when the user is login in aka "Protects the routes"
@@ -83,6 +89,7 @@ def logout():
     logout_user() # method that is defined by flask_login
     flash("You've been logged out", "success") , # second argument gives the flash message a class of sucess 
     return redirect(url_for('index'))
+
 
 
 
@@ -101,8 +108,8 @@ def user():
         name=form.name.data.strip(),
         description=form.description.data.strip(), 
         user = current_user.id)
-        return render_template("user_page.html", user=current_user, form=form, workouts=workouts)
-    return render_template("user_page.html", user=current_user, form=form, workouts=workouts)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
     # user_id = int(user)
     # user= models.User.get(models.User.id == user_id)
     # workouts = user.workouts
@@ -130,12 +137,18 @@ def user():
 
 
 
-if __name__ == '__main__':
-#   models.initialize()
-#   try:
-#      models.User.create_user(
 
-#      )
-#   except ValueError:
-#       pass
-  app.run(debug=DEBUG, port=PORT)
+
+
+# @app.route("/about")
+# def about():
+#     return 'About Page!'
+
+
+# The root route will revert back to a simpler version that just returns some text
+
+
+# ...
+if __name__ == '__main__':
+    models.initialize()
+    app.run(debug=DEBUG, port=PORT)
