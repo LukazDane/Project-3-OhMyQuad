@@ -55,31 +55,43 @@ def register():
         return redirect(url_for('index')) # once the submissin is succesful, user is redirected to the index function which routes back to the home page
     return render_template('register.html', form=form)
 
+
+@app.route('/login', methods=('GET', 'POST'))
+def login():
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+        try:
+            user = models.User.get(models.User.email == form.email.data) # comparing the user email in the database to the one put in the form
+        except models.DoesNotExist:
+            flash("your email or password doesn't exist in our database")
+        else:   # using the check_password_hash method bc we hashed the user's password when they registered. comparing the user's password in the database to the password put into the form
+            if check_password_hash(user.password, form.password.data):
+                ## creates session
+                login_user(user) # this method comes from the flask_login package
+                flash("You've been logged in", "success")
+                return redirect(url_for('index'))
+            else:
+                flash("your email or password doesn't match", "error")
+    return render_template('login.html', form=form)
+
+@app.route('/logout')
+@login_required # defines whatever routes and functions are avail when the user is login in aka "Protects the routes"
+def logout():
+    logout_user() # method that is defined by flask_login
+    flash("You've been logged out", "success") , # second argument gives the flash message a class of sucess 
+    return redirect(url_for('index'))
+
+
+
 @app.route("/about")
 def about():
     return 'About Page!'
-
-@app.route("/login")
-def login():
-    return 'Login Page!'
 
 
   # The root route will revert back to a simpler version that just returns some text
 
 
   # ...
-    
-    
-    
-    
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
   models.initialize()
   app.run(debug=DEBUG, port=PORT)
