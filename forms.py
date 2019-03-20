@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm as Form
 
-from wtforms import TextField, TextAreaField, SubmitField, StringField, PasswordField
+from wtforms import TextField, TextAreaField, SubmitField, StringField, PasswordField, IntegerField
 
-from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length, EqualTo)
+from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length, EqualTo, NumberRange)
 
 from flask_login import UserMixin
 
@@ -48,6 +48,28 @@ class RegisterForm(Form):
         'Confirm Password',
         validators = [DataRequired()]
     )
+    name = StringField(
+        'Name',
+        validators = [
+            DataRequired()
+        ])
+    height = IntegerField(
+        'Height in Inches',
+        validators=[
+            NumberRange(min= 36, max=99, message='Incorrect input. Height must be greater than 36 inches and less than 99 inches')
+        ]
+        )
+    weight = IntegerField(
+        'Weight in Pounds',
+        validators = [
+            NumberRange(min= None, max=999, message='Please input a weight less than 1000 pounds')
+        ]
+        )
+    goal = TextAreaField(
+        'Current Goal',
+        validators = [
+            DataRequired()
+        ])
 
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Email() ])

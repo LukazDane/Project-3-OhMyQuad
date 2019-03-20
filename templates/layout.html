@@ -46,6 +46,7 @@
                     {% else %}
                   <a href="{{url_for('login')}}" title="login"><p>Login</p></a>
                   <a href="{{url_for('register')}}" title="register"><p>register</p></a>
+
           {% endif %}
           
         </div>
@@ -54,6 +55,7 @@
 
     <div class="main" style="padding: 0 20px">
         <!-- <h1>{% if current_user.is_authenticated %} Hello {{current_user.username}} {{current_user.id}} {%endif%}</h1> -->
+
         <div class="content-container">
             <!-- <p>this area will contain the main content of the page</p> -->
             {% block body %}
