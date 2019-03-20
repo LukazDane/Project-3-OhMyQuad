@@ -1,5 +1,7 @@
 from flask import Flask, g
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session, request, abort 
+from flask import make_response as response
+from forms import WorkoutForm
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
 
@@ -41,6 +43,35 @@ def after_request(response):
 def index(name=None):
     return render_template('layout.html',title="Dashboard", name=name)
 
+@app.route("/profile")
+def profile(name=None):
+    return render_template('profile.html',title="Dashboard", name=name)
+
+@app.route("/about")
+def about(name=None):
+    return render_template('about.html',title="About Us", name=name)
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     error = None
+#     if request.method == 'POST':
+#         if request.form['username'] != app.config['USERNAME']:
+#             error = 'Invalid username'
+#         elif request.form['password'] != app.config['PASSWORD']:
+#             error = 'Invalid password'
+#         else:
+#             session['logged_in'] = True
+#             flash('You were logged in')
+#             return redirect(url_for('index'))
+#     return render_template('login.html', error=error)
+
+
+# @app.route('/logout')
+# def logout():
+#     session.pop('logged_in', None)
+#     flash('You were logged out')
+#     return redirect(url_for('index'))
+  # The root route will revert back to a simpler version that just returns some text
 
 @app.route('/register', methods = ('GET', 'POST'))
 def register():
@@ -83,9 +114,9 @@ def logout():
 
 
 
-@app.route("/about")
-def about():
-    return 'About Page!'
+# @app.route("/about")
+# def about():
+#     return 'About Page!'
 
 
   # The root route will revert back to a simpler version that just returns some text
