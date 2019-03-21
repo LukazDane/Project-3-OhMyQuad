@@ -14,20 +14,28 @@ class User(UserMixin, Model):
     username = CharField(unique=True)
     email = CharField(unique=True)
     password = CharField(max_length=100)
+    name = CharField()
+    height = IntegerField()
+    weight = IntegerField()
+    goal = CharField(max_length=100)
     joined_at = DateTimeField(default=datetime.datetime.now)
   
     class Meta:
-      database = DATABASE
-      order_by = ('-timestamp',)
+        database = DATABASE
+        order_by = ('-timestamp',)
     
     #  function that creates a new user
     @classmethod
-    def create_user(cls, username, email , password):
+    def create_user(cls, username, email , password, name, height, weight, goal):
         try:
             cls.create(
                 username = username,
                 email = email,
-                password = generate_password_hash(password)
+                password = generate_password_hash(password),
+                name = name,
+                height = height,
+                weight = weight,
+                goal = goal
             )
         except IntegrityError:
             raise ValueError("User already exists")
@@ -40,16 +48,17 @@ class User(UserMixin, Model):
 
 
 class Workout(Model):
-  name = CharField()
-  timestamp = DateTimeField(default=datetime.datetime.now)
-  #relate the post to the sub model
-  user = ForeignKeyField(User, backref="workouts") 
+    name = CharField()
+    timestamp = DateTimeField(default=datetime.datetime.now)
+    #relate the post to the sub model
+    user = ForeignKeyField(User, backref="workouts") 
+    description = CharField()
 
 
 
-  class Meta:
-    database = DATABASE
-    order_by = ('-timestamp',)
+    class Meta:
+        database = DATABASE
+        order_by = ('-timestamp',)
 
 
 class Exercise(Model):
@@ -60,7 +69,7 @@ class Exercise(Model):
     type=CharField()
 
     class Meta:
-      database = DATABASE
+        database = DATABASE
 
 
 class WorkoutExercise(Model):
@@ -68,7 +77,7 @@ class WorkoutExercise(Model):
     workout = ForeignKeyField(Workout) 
 
     class Meta:
-      database = DATABASE
+        database = DATABASE
 
 
 
@@ -76,7 +85,6 @@ class WorkoutExercise(Model):
 
 
 def initialize():
-  DATABASE.connect()
-  DATABASE.create_tables([Exercise,Workout,WorkoutExercise,User], safe=True)
-  DATABASE.close()
-    
+    DATABASE.connect()
+    DATABASE.create_tables([Exercise,Workout,WorkoutExercise,User], safe=True)
+    DATABASE.close()
