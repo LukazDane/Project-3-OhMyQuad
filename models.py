@@ -4,11 +4,7 @@ from peewee import *
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
 
-
-
 DATABASE = SqliteDatabase('ohmyquad.db')
-
-
 
 class User(UserMixin, Model):
     __table_args__ = {'extend_existing': True} 
@@ -23,8 +19,8 @@ class User(UserMixin, Model):
     joined_at = DateTimeField(default=datetime.datetime.now)
   
     class Meta:
-      database = DATABASE
-      order_by = ('-timestamp',)
+        database = DATABASE
+        order_by = ('-timestamp',)
     
     #  function that creates a new user
     @classmethod
@@ -42,50 +38,45 @@ class User(UserMixin, Model):
         except IntegrityError:
             raise ValueError("User already exists")
 
-
-
-
-
-
 class Workout(Model):
-  name = CharField()
-  description = TextField()
-  timestamp = DateTimeField(default=datetime.datetime.now)
-  #relate the post to the sub model
-  user = ForeignKeyField(User, backref="workouts") 
+    name = CharField()
+    description = TextField()
+    timestamp = DateTimeField(default=datetime.datetime.now)
+    #relate the post to the sub model
+    user = ForeignKeyField(User, backref="workouts") 
 
-
-
-  class Meta:
-    database = DATABASE
-    order_by = ('-timestamp',)
-
+    class Meta:
+        database = DATABASE
+        order_by = ('-timestamp',)
 
 class Exercise(Model):
     name=CharField()
     description=TextField()
-    reps=IntegerField()
-    sets=IntegerField()
     type=CharField()
 
     class Meta:
-      database = DATABASE
-
+        database = DATABASE
+    
+    @classmethod
+    def create_exercise(cls, name, description, type):
+       # print(location)
+        try:
+            cls.create(
+                name = name,
+                description = description,
+                type = type)
+        
+        except IntegrityError:
+            raise ValueError("create error")
 
 class WorkoutExercise(Model):
     exercise = ForeignKeyField(Exercise) 
     workout = ForeignKeyField(Workout) 
 
     class Meta:
-      database = DATABASE
-
-
-
-
-
+        database = DATABASE
 
 def initialize():
-  DATABASE.connect()
-  DATABASE.create_tables([Exercise,Workout,WorkoutExercise,User], safe=True)
-  DATABASE.close()
-    
+   DATABASE.connect()
+   DATABASE.create_tables([Exercise,Workout,WorkoutExercise,User], safe=True)
+   DATABASE.close()
