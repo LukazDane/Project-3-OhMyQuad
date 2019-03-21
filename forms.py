@@ -76,11 +76,15 @@ class LoginForm(Form):
     password = PasswordField('Password', validators=[DataRequired() ])
 
 
-
-
-
 class WorkoutForm(Form):
+    # name = TextField("By:")
+    name = TextField("Title")
+    description = TextAreaField("Content")
+    submit = SubmitField('Create Workout')
+
+
+class EditWorkoutForm(Form):
     name = TextField("By:")
     title = TextField("Title")
     description = TextAreaField("Content")
-    submit = SubmitField('Create Workout')
+    submit = SubmitField('Edit Workout')

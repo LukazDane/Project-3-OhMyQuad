@@ -40,17 +40,9 @@ class User(UserMixin, Model):
         except IntegrityError:
             raise ValueError("User already exists")
 
-
-
-
-
-
-
-
 class Workout(Model):
     name = CharField()
     timestamp = DateTimeField(default=datetime.datetime.now)
-    #relate the post to the sub model
     user = ForeignKeyField(User, backref="workouts") 
     description = CharField()
 
