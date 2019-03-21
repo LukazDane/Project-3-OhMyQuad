@@ -19,12 +19,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
     />
-    <link rel="stylesheet" type="text/css" href="./static/style.css" />
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
       <nav class="navbar is-dark columns" role="navigation" aria-label="main navigation">
-        <div class="column is-three-quarters"><a href="/"><p class="return">Oh My Quad!</p></a></div>
+        <div class="column is-three-quarters"><a href="/"><p class="return">Oh My Quad!</p></a>
+        {% if current_user.is_authenticaded %}
+        <img class="logo" src="/static/omq.png" />
+        {% endif %}
+        </div>
         <div class="column is-one-quarter">
           {% if current_user.is_authenticated %}
                  <ul>
@@ -63,6 +67,7 @@
             {% endblock %}
             <!-- <p>Continued</p> -->
         </div>
+    </div>
         <footer class="footer is-dark columns">
             <div class="column personal-link">
                 <a href="#"><i class="fas fa-cog"></i></a><p>Leo</p></div>

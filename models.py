@@ -1,4 +1,9 @@
 import datetime
+from datetime import date
+from datetime import time
+
+
+
 #import everything from peewee because we might need it 
 from peewee import *
 from flask_login import UserMixin
@@ -16,7 +21,7 @@ class User(UserMixin, Model):
     height = IntegerField()
     weight = IntegerField()
     goal = CharField(max_length=100)
-    joined_at = DateTimeField(default=datetime.datetime.now)
+    joined_at = DateTimeField(default=date.today)
   
     class Meta:
         database = DATABASE
@@ -48,6 +53,7 @@ class Workout(Model):
     class Meta:
         database = DATABASE
         order_by = ('-timestamp',)
+
 
 class Exercise(Model):
     name=CharField()

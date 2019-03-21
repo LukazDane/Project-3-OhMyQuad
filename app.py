@@ -57,7 +57,7 @@ def delete_workout(workoutid):
     workouts = models.Workout.select().where(models.Workout.user == current_user.id)
     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
-
+@app.route("/profile/")
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -127,22 +127,24 @@ def logout():
 
 
 @app.route("/about")
-def about():
-    return 'About Page!'
+def about(name=None):
+    return render_template('about.html', name=name)
 
 
 
-@app.route('/profile',methods=['GET', 'POST'])
-def user():
-    form = forms.WorkoutForm()
-    workouts = models.Workout.select()
-    if form.validate_on_submit():
-        models.Workout.create(
-        name=form.name.data.strip(),
-        description=form.description.data.strip(), 
-        user = current_user.id)
-        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
-    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+# @app.route('/profile',methods=['GET', 'POST'])
+# @app.route('/profile/')
+# @app.route('/profile/<workoutid>')
+# def user():
+#     form = forms.WorkoutForm()
+#     workouts = models.Workout.select()
+    # if form.validate_on_submit():
+#         models.Workout.create(
+#         name=form.name.data.strip(),
+#         description=form.description.data.strip(), 
+#         user = current_user.id)
+    #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
     # user_id = int(user)
     # user= models.User.get(models.User.id == user_id)
     # workouts = user.workouts
