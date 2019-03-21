@@ -1,10 +1,21 @@
-{% extends "layout.html" %} {% block body %}
-<div style="text-align:center;">
-  <video
-    src="https://www.youtube.com/embed/Q5XvLJrW6Fg"
-    allowfullscreen=""
-    width="100%"
-    frameborder="0"
-  ></video>
+{% extends "layout.html" %}
+{%block body%}
+<div class="content-container">
+        <video autoplay muted loop id="myVideo">
+                <source src="../static/workout.mp4" type="video/mp4">
+        </video>
+     <h1>hello</h1>
 </div>
-{% endblock %}
+
+<div class="stats">
+        <div class="statcontent">
+                <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+        </div>
+        <div class="statcontent">
+                <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+        </div>
+        <div class="statcontent">
+                <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+        </div>
+</div>
+{%endblock%}
