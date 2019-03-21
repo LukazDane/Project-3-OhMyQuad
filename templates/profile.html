@@ -30,6 +30,7 @@
             <div class="message-body">
                 {{workout.description}}
             </div>
+            <a href="{{url_for('delete_workout', workoutid=workout.id)}}">delete</a>
         </article>
 
       </div>
