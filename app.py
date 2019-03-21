@@ -8,8 +8,6 @@ from flask_bcrypt import check_password_hash
 import forms 
 import models
 
-
-
 DEBUG = True
 PORT = 9000
 
@@ -174,4 +172,68 @@ def user():
 # ...
 if __name__ == '__main__':
     models.initialize()
+
+    try:
+        models.Exercise.create_exercise(
+        name='Lat Pulldown',
+        description="4 sets, 15 Reps (1 warm-up set of 15 reps, 3 working sets of 15 reps)",
+        type='Lats'
+        )
+
+        models.Exercise.create_exercise(
+        name='Seated Cable Rows',
+        description="4 sets, 15 Reps (1 warm-up set of 15 reps, 3 working sets of 15 reps)",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Underhand Cable Pulldowns',
+        description="3 sets, 10-12 Reps",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Barbell Squat',
+        description="4 sets, 4-6 reps",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Dumbbell Lunges. ',
+        description="4 sets, 12 reps each leg",
+        type='Legs',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Leg Press. ',
+        description="3 sets, 12-15 reps",
+          type='Legs',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Underhand Cable Pulldowns',
+        description="3 sets, 10-12 Reps",
+        type='Legs',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Close-Grip Bench Press',
+        description="4 sets, 6, 6, 8, 10 reps (60-90 seconds rest)",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Seated Dumbell Press',
+        description="3 sets, 8, 10, 12 reps (60 seconds rest)",
+        type='Triceps',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='V-Bar Pulldown',
+        description="2 sets, 10, 12 reps (60 seconds rest)",
+        type='Triceps',
+       
+        )
+    except ValueError:
+        pass
     app.run(debug=DEBUG, port=PORT)
