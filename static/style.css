@@ -39,33 +39,20 @@
 .column {
   text-align: center;
 }
-
-.content-container {
-  width: 95vw;
-  height: 95vh;
-  font-size: 2rem;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  max-width: 100%; 
-  max-height: 70%;
-
-}
 nav .column {
   padding: 1rem 0 0 1rem;
 }
 .far {
   font-size: 1.5rem;
 }
-
 .personal-link {
   background-color: rgba(100, 100, 100, 0.5);
 }
-
+.content-container {
+  background-color: rgba(255, 0, 0, 0);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
 
 .footer {
   padding: 0 !important;
@@ -110,15 +97,12 @@ nav .column {
   100% {
     transform: translate(1px, -2px) rotate(-1deg);
   }
-
 }
 
-#myVideo {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
+video {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 /* profile  */
 .user {

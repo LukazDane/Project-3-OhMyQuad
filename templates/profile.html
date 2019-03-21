@@ -14,8 +14,8 @@
     </div>
   </div>
   <div class="column is-three-quarters">
-    {% if workouts %}
-    <h1>Workout List</h1>
+    <h1>Your Workouts</h1>
+    <hr />
     {% for workout in workouts %}
     {% if workout %}
     <div class="workout">
@@ -33,11 +33,13 @@
             <a href="{{url_for('delete_workout', workoutid=workout.id)}}">delete</a>
         </article>
 
-            {{ form.submit(class_="button") }}
-        </form>
-    </section>
-
-{% endblock %}
+      </div>
+      {%else %}
+      <div class="workout">You have no workouts to display</div>
+       <div><button class="add" type="submit">+</button></div>
+      {% endif %}
+      {% endfor %}
+     
 
       <section>
           <h2>Add workouts</h2>
