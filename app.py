@@ -46,11 +46,23 @@ def index(name=None):
   else: 
     return render_template('landing.html',title="Dashboard", name=name)
 
+
+@app.route("/profile/<workoutid>")
+@login_required
+def delete_workout(workoutid):
+    form = forms.WorkoutForm()
+    workout = models.Workout.get(workoutid)
+    workout.delete_instance()
+    workouts = models.Workout.select().where(models.Workout.user == current_user.id)
+    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+
+
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
-def profile(name=None):
+def profile():
     form = forms.WorkoutForm()
-    workouts = models.Workout.select()
+    workouts = models.Workout.select().where(models.Workout.user == current_user.id)
+    
     if form.validate_on_submit():
         models.Workout.create(
         name=form.name.data.strip(),
@@ -63,7 +75,7 @@ def profile(name=None):
 
 
 
-    return render_template('profile.html',title="Dashboard", name=name)
+    # return render_template('profile.html',title="Dashboard", name=name)
 
 @app.route("/about")
 def about(name=None):

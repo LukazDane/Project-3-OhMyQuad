@@ -54,8 +54,6 @@ class Workout(Model):
     user = ForeignKeyField(User, backref="workouts") 
     description = CharField()
 
-
-
     class Meta:
         database = DATABASE
         order_by = ('-timestamp',)
