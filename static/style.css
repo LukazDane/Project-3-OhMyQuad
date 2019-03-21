@@ -3,7 +3,9 @@
 * {
   box-shadow: border-box;
 }
-
+.body {
+  z-index: -999;
+}
 .return {
   line-height: 2.5rem;
   overflow: hidden;
@@ -39,7 +41,7 @@ nav .column {
   margin-bottom: 2rem;
 }
 
-footer {
+.footer {
   padding: 0 !important;
   background-color: black !important;
   color: white !important;
@@ -100,6 +102,61 @@ video {
   height: 55%;
   overflow: hidden;
 }
+/* About */
+img.about-img {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.columns {
+  position: relative;
+  width: 100%;
+  /* overflow: hidden; */
+  display: flex;
+}
+
+.about {
+  flex: 1 1 0%;
+  min-width: 0;
+  text-align: center;
+  display: inline-block;
+  width: 33%;
+  height: 90vh;
+  -webkit-transition: flex-basis 0.3s ease-in;
+  transition: flex-basis 0.3s ease-in;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.about {
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
+  background: whitesmoke;
+}
+
+.about:hover {
+  cursor: pointer;
+  height: 90vh;
+  overflow: hidden;
+
+  flex-basis: 100%;
+  -webkit-transition: flex-basis 0.3s ease-out;
+  transition: flex-basis 0.3s ease-out;
+  text-overflow: ellipsis;
+}
+
+.about:hover {
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
+  background-color: aquamarine;
+}
+
+/* end about */
 
 .return {
   text-align: left;
@@ -181,4 +238,12 @@ a.dropdown-item,
 button.dropdown-item {
   text-align: center;
   font-weight: bold;
+}
+
+a.dropdown-item:hover,
+button.dropdown-item:hover {
+  background-color: rgba(255, 0, 0, 0);
+  text-decoration: underline;
+  color: #fff;
+  font-size: x-large;
 }
