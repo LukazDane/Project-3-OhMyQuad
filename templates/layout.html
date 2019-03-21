@@ -9,27 +9,43 @@
       crossorigin="anonymous"
     />
 
-    <link
+    <!-- <link
       rel="stylesheet"
       type="text/css"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
+    /> -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
     />
-    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <link rel="stylesheet" type="text/css" href="./static/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-      <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-        <li> <a href="/"> Flask Blog</a></li>
-        <div class="col">
+      <nav class="navbar is-dark columns" role="navigation" aria-label="main navigation">
+        <a href="/" class="column is-three-quarters"><p class="return">Oh My Quad!</p></a>
+        <div class="column is-one-quarter">
           {% if current_user.is_authenticated %}
-                  <p></p> <a href="{{url_for('logout')}}" title="logout">Logout</a>
-                  {% else %}
-                  <a href="{{url_for('login')}}" title="login">Login</a>
-                  <a href="{{url_for('register')}}" title="register">register</a>
+                 <ul>
+                    <li><span aria-haspopup="true" aria-controls="dropdown-menu"><i class="far fa-user-circle"></i></span>
+                        </span>
+                    <ul>        
+                      <li><a href="{{url_for('logout')}}" title="logout" class="dropdown-item">Logout</a></li>
+                      <li><a href="/" class="dropdown-item">
+                            Donate
+                        </a></li>
+                      <li><a href="{{url_for('profile')}}" class="dropdown-item">
+                            Profile
+                        </a></li>
+                      <li><a href="{{url_for('about')}}" class="dropdown-item">
+                            About
+                        </a></li>
+                    </ul>
+                </li>
+                    </ul>
+                    {% else %}
+                  <a href="{{url_for('login')}}" title="login"><p>Login</p></a>
+                  <a href="{{url_for('register')}}" title="register"><p>register</p></a>
 
           {% endif %}
           
@@ -38,14 +54,13 @@
       </nav>
 
     <div class="main" style="padding: 0 20px">
-        <h1>Templates work!</h1>
-        <h1>{% if current_user.is_authenticated %} Welcome: {{current_user.name}} Your current height is: {{current_user.height}} Inches. 
-          Your current weight is {{current_user.weight}} Pounds. Your Fitness goal is: "{{current_user.goal}}". Your Username is: {{current_user.username}} {{current_user.id}} {%endif%}</h1>
+        <!-- <h1>{% if current_user.is_authenticated %} Hello {{current_user.username}} {{current_user.id}} {%endif%}</h1> -->
+
         <div class="content-container">
-            <p>this area will contain the main content of the page</p>
-            {% block content %}
+            <!-- <p>this area will contain the main content of the page</p> -->
+            {% block body %}
             {% endblock %}
-            <p>Continued</p>
+            <!-- <p>Continued</p> -->
         </div>
         <footer class="footer is-dark columns">
             <div class="column personal-link">
