@@ -17,16 +17,42 @@
     <h1>Your Workouts</h1>
     <hr />
     {% for workout in workouts %}
+    {% if workout %}
     <div class="workout">
-      <div class="workout-title">Title</div>
-      <div>
-        <p>Exercises:</p>
-        <button type="submit" name="add an exercise">+</button>
+        <article class="message is-primary">
+            <div class="message-header">
+                
+                <p>By: {{current_user.username}}</p>
+            </div>
+            <div class="message-body">
+                {{workout.description}}
+            </div>
+        </article>
+
       </div>
       {%else %}
       <div class="workout">You have no workouts to display</div>
+       <div><button class="add" type="submit">+</button></div>
+      {% endif %}
       {% endfor %}
-      <div><button class="add" type="submit">+</button></div>
+     
+
+      <section>
+          <h2>Add workouts</h2>
+          <form method="POST" action="" novalidate>
+              {{ form.hidden_tag() }}
+              <div class="field">
+              {{ form.name.label }}
+              {{ form.name(class_="input") }}
+              </div>
+              <div class="field">
+              {{ form.description.label }}
+              {{ form.description(class_="textarea") }}
+              </div>
+              {{ form.submit(class_="button") }}
+          </form>
+      </section>
+      
     </div>
     {% endblock %}
   </div>

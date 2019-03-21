@@ -10,7 +10,7 @@ import models
 
 
 DEBUG = True
-PORT = 8000
+PORT = 9000
 
 app = Flask(__name__)
 app.secret_key = 'elsdhfsdlfdsjfkljdslfhjlds'
@@ -24,7 +24,7 @@ def load_user(userid):
     try:
         return models.User.get(models.User.id == userid)
     except models.DoesNotExist:
-        return none
+        return None
 
 # Handle requests when the come in (before) and when they complete (after)
 @app.before_request
@@ -46,9 +46,23 @@ def index(name=None):
   else: 
     return render_template('landing.html',title="Dashboard", name=name)
 
-@app.route("/profile")
+@app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile(name=None):
+    form = forms.WorkoutForm()
+    workouts = models.Workout.select()
+    if form.validate_on_submit():
+        models.Workout.create(
+        name=form.name.data.strip(),
+        description=form.description.data.strip(), 
+        user = current_user.id)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+
+
+
+
+
     return render_template('profile.html',title="Dashboard", name=name)
 
 @app.route("/about")
