@@ -80,6 +80,7 @@ class LoginForm(Form):
 
 
 class WorkoutForm(Form):
-    name = TextField("By:")
+    name = TextField()
+    title = TextField("Title")
     description = TextAreaField("Content")
     submit = SubmitField('Create Workout')

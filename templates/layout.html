@@ -14,6 +14,7 @@
       type="text/css"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     /> -->
+    <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css"
@@ -23,7 +24,7 @@
   </head>
   <body>
       <nav class="navbar is-dark columns" role="navigation" aria-label="main navigation">
-        <a href="/" class="column is-three-quarters"><p class="return">Oh My Quad!</p></a>
+        <div class="column is-three-quarters"><a href="/"><p class="return">Oh My Quad!</p></a></div>
         <div class="column is-one-quarter">
           {% if current_user.is_authenticated %}
                  <ul>
@@ -44,8 +45,8 @@
                 </li>
                     </ul>
                     {% else %}
-                  <a href="{{url_for('login')}}" title="login"><p>Login</p></a>
-                  <a href="{{url_for('register')}}" title="register"><p>register</p></a>
+                  <a href="{{url_for('login')}}" title="login" class="lr"><p >Login</p></a>
+                  <a href="{{url_for('register')}}" title="register" class="lr"><p >Register</p></a>
 
           {% endif %}
           

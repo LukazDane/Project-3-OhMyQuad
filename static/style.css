@@ -1,15 +1,19 @@
 /* div { */
 /* border: 1px solid black; */
+
 * {
   box-shadow: border-box;
 }
-
+.body {
+  z-index: -999;
+}
 .return {
   line-height: 2.5rem;
   overflow: hidden;
   font-size: 2.5rem;
   color: rgba(255, 245, 224, 1);
   animation: none;
+  font-family: "Black Ops One", cursive;
 }
 
 .return:hover {
@@ -20,6 +24,17 @@
   color: red;
   animation: wiggle 0.5s;
   animation-iteration-count: infinite;
+}
+.lr {
+  width: 49%;
+  display: inline-block;
+  font-family: "Black Ops One", cursive;
+  font-size: x-large;
+  color: whitesmoke;
+}
+.lr:hover {
+  color: whitesmoke;
+  text-decoration: underline;
 }
 .column {
   text-align: center;
@@ -52,7 +67,7 @@ nav .column {
 }
 
 
-footer {
+.footer {
   padding: 0 !important;
   background-color: black !important;
   color: white !important;
@@ -105,7 +120,7 @@ footer {
   min-width: 100%; 
   min-height: 100%;
 }
-
+/* profile  */
 .user {
   border-right: 2px solid #363636;
   padding-right: 0;
@@ -113,9 +128,81 @@ footer {
 
 .prof-img-a {
   width: 100%;
-  height: 55%;
+  height: 20rem;
   overflow: hidden;
 }
+
+.workout {
+  background-color: #f7f5e2;
+  border-radius: 0 20px 0 20px;
+  margin-bottom: 2rem;
+  box-shadow: 10px 10px 5px grey;
+}
+.message-header {
+  border-radius: 0 20px 0 0;
+  background-color: #363636;
+}
+
+.message-body {
+  border-radius: 0 0 0 20px;
+  background-color: #f7f5e2;
+}
+/* end profile */
+/* About */
+img.about-img {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.columns {
+  position: relative;
+  width: 100%;
+  /* overflow: hidden; */
+  display: flex;
+}
+
+.about {
+  flex: 1 1 0%;
+  min-width: 0;
+  text-align: center;
+  display: inline-block;
+  width: 33%;
+  height: 90vh;
+  -webkit-transition: flex-basis 0.3s ease-in;
+  transition: flex-basis 0.3s ease-in;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.about {
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
+  background: whitesmoke;
+}
+
+.about:hover {
+  cursor: pointer;
+  height: 90vh;
+  overflow: hidden;
+
+  flex-basis: 100%;
+  -webkit-transition: flex-basis 0.3s ease-out;
+  transition: flex-basis 0.3s ease-out;
+  text-overflow: ellipsis;
+}
+
+.about:hover {
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s linear;
+  background-color: aquamarine;
+}
+
+/* end about */
 
 .return {
   text-align: left;
@@ -197,4 +284,12 @@ a.dropdown-item,
 button.dropdown-item {
   text-align: center;
   font-weight: bold;
+}
+
+a.dropdown-item:hover,
+button.dropdown-item:hover {
+  background-color: rgba(255, 0, 0, 0);
+  text-decoration: underline;
+  color: #fff;
+  font-size: x-large;
 }

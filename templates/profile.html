@@ -6,43 +6,32 @@
     <h1>{{ current_user.username }}</h1>
     <hr />
     <div class="stats-container">
-      <p class="stats">Height:</p>
-      <p class="stats">Weight:</p>
-      <p class="stats">Goal Weight:</p>
+      <p class="stats">Height: {{ current_user.height }}</p>
+      <p class="stats">Weight: {{ current_user.weight }}</p>
+      <p class="stats">Goal: {{ current_user.goal }}</p>
       <p class="stats">About me:</p>
-      <p class="stats">Join Date:</p>
+      <p class="stats">Join Date: {{ current_user.joined_at }}</p>
     </div>
   </div>
   <div class="column is-three-quarters">
     {% if workouts %}
     <h1>Workout List</h1>
     {% for workout in workouts %}
-    <article class="message is-primary">
-        <div class="message-header">
-
-            
-            <p>By: {{workout.name}}</p>
-        </div>
-        <div class="message-body">
-            {{workout.description}}
-        </div>
-    </article>
-    {% endfor %}
-  {% endif %}
-
-    <section>
-        <h2>Add a Post to this Sub</h2>
-        <form method="POST" action="" novalidate>
-            {{ form.hidden_tag() }}
-
-            <div class="field">
-            {{ form.name.label }}
-            {{ form.name(class_="input") }}
+    {% if workout %}
+    <div class="workout">
+        <article class="message ">
+            <div class="message-header">
+                
+                <p>By: {{current_user.username}}</p>
             </div>
-            <div class="field">
-            {{ form.description.label }}
-            {{ form.description(class_="textarea") }}
+            <div class="message-body">
+                this div is where exercises will go
             </div>
+            <div class="message-body">
+                {{workout.description}}
+            </div>
+            <a href="{{url_for('delete_workout', workoutid=workout.id)}}">delete</a>
+        </article>
 
             {{ form.submit(class_="button") }}
         </form>
@@ -50,3 +39,24 @@
 
 {% endblock %}
 
+      <section>
+          <h2>Add workouts</h2>
+          <form method="POST" action="" novalidate>
+              {{ form.hidden_tag() }}
+              <div class="field">
+              {{ form.name.label }}
+              {{current_user.username}}
+              <!-- {{ form.name(class_="input") }} -->
+              </div>
+              <div class="field">
+              {{ form.description.label }}
+              {{ form.description(class_="textarea") }}
+              </div>
+              {{ form.submit(class_="button") }}
+          </form>
+      </section>
+      
+    </div>
+  </div>
+</div>
+{% endblock %}
