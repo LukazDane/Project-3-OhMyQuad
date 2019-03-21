@@ -48,6 +48,15 @@ class RegisterForm(Form):
         'Confirm Password',
         validators = [DataRequired()]
     )
+    Height = StringField(
+      'Height',
+      validators = [
+        Regexp(
+                r'^[a-zA-Z0-9_]+$',
+                message=("Height should be a number.")
+            )
+      ]
+    )
 
 class LoginForm(Form):
     email = StringField('Email', validators=[DataRequired(), Email() ])

@@ -10,7 +10,7 @@ import models
 
 
 DEBUG = True
-PORT = 8000
+PORT = 5000
 
 app = Flask(__name__)
 app.secret_key = 'elsdhfsdlfdsjfkljdslfhjlds'
