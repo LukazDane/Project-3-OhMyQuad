@@ -157,6 +157,13 @@ div.content,
 }
 
 /* End Landing */
+
+/* login form */
+
+/* end login */
+/* register form */
+
+/* end register */
 /* profile  */
 .user {
   border-right: 2px solid #363636;
@@ -185,6 +192,21 @@ div.content,
   background-color: #f7f5e2;
 }
 /* end profile */
+/* edit workout form */
+form.edit-workout {
+  background-color: #f7f5e2;
+  border-radius: 0 20px 0 20px;
+  margin-bottom: 2rem;
+  box-shadow: 10px 10px 5px grey;
+  height: auto;
+}
+
+div.edit-workout-name {
+  border-radius: 0 20px 0 0;
+  background-color: #363636;
+  color: white;
+}
+/* end edit workout */
 /* About */
 img.about-img {
   border-radius: 50%;
