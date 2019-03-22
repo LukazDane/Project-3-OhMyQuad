@@ -23,11 +23,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-      <nav class="navbar is-dark columns" role="navigation" aria-label="main navigation">
-        <div class="column is-three-quarters"><a href="/"><p class="return">Oh My Quad!</p></a>
-        {% if current_user.is_authenticaded %}
-        <img class="logo" src="/static/omq.png" />
-        {% endif %}
+      <nav class="navbar is-dark columns" role="navigation" aria-label="main navigation">{% if current_user.is_authenticated %}
+        <div class="column is-three-quarters"><a href="{{url_for('profile')}}"><p class="return">Oh My Quad!</p></a>
+            {% else %}
+            <div class="column is-three-quarters"><a href="/"><p class="return">Oh My Quad!</p></a>
+                {% endif %}
         </div>
         <div class="column is-one-quarter">
           {% if current_user.is_authenticated %}
