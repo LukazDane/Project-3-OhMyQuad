@@ -21,13 +21,13 @@
     <div class="workout">
         <article class="message ">
             <div class="message-header">
-                
-                <p>By: {{current_user.username}}</p>
+                {{workout.name}}
             </div>
             <div class="message-body">
                 {{workout.description}}
             </div>
             <a href="{{url_for('delete_workout', workoutid=workout.id)}}">delete</a>
+            <a href="{{url_for('edit_workout', workoutid=workout.id)}}">Edit</a>
         </article>
 
       </div>
@@ -39,7 +39,8 @@
      
 
       <section>
-          <h2>Add workouts</h2>
+        <h2>Add workouts</h2>
+          
           <form method="POST" action="" novalidate>
               {{ form.hidden_tag() }}
               <div class="field">
@@ -56,6 +57,7 @@
                 {{form.area}}
               </div>
               {{ form.submit(class_="button") }}
+              
           </form>
       </section>
       
