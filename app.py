@@ -39,6 +39,10 @@ def after_request(response):
     g.db.close()
     return response
 
+## =======================================================
+## ROOT ROUTE
+## =======================================================
+
 @app.route("/")
 def index(name=None):
     if 'auth_token' in session:
@@ -47,6 +51,10 @@ def index(name=None):
     else: 
         return render_template('landing.html',title="Dashboard", name=name)
 
+
+## =======================================================
+## DELETE WORKOUT ROUTE
+## =======================================================
 
 @app.route("/profile/<workoutid>")
 @login_required
@@ -58,6 +66,9 @@ def delete_workout(workoutid):
     return redirect(url_for('profile'))
     # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
+## =======================================================
+## EDIT WORKOUT ROUTE
+## =======================================================
 
 @app.route("/editworkout/<workoutid>", methods=["GET", "POST"])
 @login_required
@@ -108,9 +119,62 @@ def profile():
     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
 
+## =======================================================
+## EDIT PROFILE ROUTE
+## =======================================================
 
+@app.route('/editProfile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form= forms.UpdateUserForm()
+    user = models.User.get(current_user.id)
+    if form.validate_on_submit():
+        user.height = form.height.data
+        user.weight = form.weight.data
+        user.goal = form.goal.data
+        user.save()
+        flash('Your Profile has been updated.') # redirects the user back to the profile page after the form is submitted
+        return redirect(url_for('profile'))
+
+    return render_template('edit_profile.html', form = form)
     # return render_template('profile.html',title="Dashboard", name=name)
 
+<<<<<<< HEAD
+## =======================================================
+## ABOUT ROUTE
+## =======================================================
+
+@app.route("/about")
+def about(name=None):
+    return render_template('about.html',title="About Us", name=name)
+
+# @app.route('/login', methods=['GET', 'POST'])
+# def login():
+#     error = None
+#     if request.method == 'POST':
+#         if request.form['username'] != app.config['USERNAME']:
+#             error = 'Invalid username'
+#         elif request.form['password'] != app.config['PASSWORD']:
+#             error = 'Invalid password'
+#         else:
+#             session['logged_in'] = True
+#             flash('You were logged in')
+#             return redirect(url_for('index'))
+#     return render_template('login.html', error=error)
+
+
+# @app.route('/logout')
+# def logout():
+#     session.pop('logged_in', None)
+#     flash('You were logged out')
+#     return redirect(url_for('index'))
+  # The root route will revert back to a simpler version that just returns some text
+=======
+>>>>>>> 535cf3c8d15544d4049c01ac1fb7e55ba6217933
+
+## =======================================================
+## REGISTER ROUTE
+## =======================================================
 
 ## =======================================================
 ## EDIT PROFILE ROUTE
@@ -151,6 +215,10 @@ def register():
     return render_template('register.html', form=form)
 
 
+## =======================================================
+## LOGIN ROUTE
+## =======================================================
+
 @app.route('/login', methods=('GET', 'POST'))
 def login():
     form = forms.LoginForm()
@@ -169,6 +237,10 @@ def login():
                 flash("your email or password doesn't match", "error")
     
     return render_template('login.html', form=form)
+
+## =======================================================
+## LOGOUT ROUTE
+## =======================================================
 
 @app.route('/logout')
 @login_required # defines whatever routes and functions are avail when the user is login in aka "Protects the routes"
