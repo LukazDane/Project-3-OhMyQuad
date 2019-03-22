@@ -52,19 +52,19 @@ class Workout(Model):
 class Exercise(Model):
     name=CharField()
     description=TextField()
-    type=CharField()
+    area=CharField()
 
     class Meta:
         database = DATABASE
     
     @classmethod
-    def create_exercise(cls, name, description, type):
+    def create_exercise(cls, name, description, area):
        # print(location)
         try:
             cls.create(
                 name = name,
                 description = description,
-                type = type)
+                area = area)
         
         except IntegrityError:
             raise ValueError("create error")

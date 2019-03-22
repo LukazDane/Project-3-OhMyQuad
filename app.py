@@ -139,8 +139,10 @@ def user():
     if form.validate_on_submit():
         models.Workout.create(
         name=form.name.data.strip(),
-        description=form.description.data.strip(), 
+        description=form.description.data.strip(),
+        area = form.area.data.strip(),
         user = current_user.id)
+
         return render_template("profile.html", user=current_user, form=form, workouts=workouts)
     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
     # user_id = int(user)
@@ -189,63 +191,63 @@ if __name__ == '__main__':
         models.Exercise.create_exercise(
         name='Lat Pulldown',
         description="4 sets, 15 Reps (1 warm-up set of 15 reps, 3 working sets of 15 reps)",
-        type='Lats'
+        area='Lats'
         )
 
         models.Exercise.create_exercise(
         name='Seated Cable Rows',
         description="4 sets, 15 Reps (1 warm-up set of 15 reps, 3 working sets of 15 reps)",
-        type='Lats',
+        area='Lats',
        
         ),
         models.Exercise.create_exercise(
         name='Underhand Cable Pulldowns',
         description="3 sets, 10-12 Reps",
-        type='Lats',
+        area='Lats',
        
         ),
         models.Exercise.create_exercise(
         name='Barbell Squat',
         description="4 sets, 4-6 reps",
-        type='Lats',
+        area='Legs',
        
         ),
         models.Exercise.create_exercise(
         name='Dumbbell Lunges. ',
         description="4 sets, 12 reps each leg",
-        type='Legs',
+        area='Legs',
        
         ),
         models.Exercise.create_exercise(
         name='Leg Press. ',
         description="3 sets, 12-15 reps",
-          type='Legs',
+          area='Legs',
        
         ),
         models.Exercise.create_exercise(
         name='Underhand Cable Pulldowns',
         description="3 sets, 10-12 Reps",
-        type='Legs',
+        area='Triceps',
        
         ),
         models.Exercise.create_exercise(
         name='Close-Grip Bench Press',
         description="4 sets, 6, 6, 8, 10 reps (60-90 seconds rest)",
-        type='Lats',
+        area='Triceps',
        
         ),
         models.Exercise.create_exercise(
         name='Seated Dumbell Press',
         description="3 sets, 8, 10, 12 reps (60 seconds rest)",
-        type='Triceps',
+        area='Triceps',
        
         ),
         models.Exercise.create_exercise(
         name='V-Bar Pulldown',
         description="2 sets, 10, 12 reps (60 seconds rest)",
-        type='Triceps',
+        area='Triceps',
        
         )
     except ValueError:
-        pass
+        raise
     app.run(debug=DEBUG, port=PORT)

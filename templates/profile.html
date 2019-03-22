@@ -25,9 +25,6 @@
                 <p>By: {{current_user.username}}</p>
             </div>
             <div class="message-body">
-                this div is where exercises will go
-            </div>
-            <div class="message-body">
                 {{workout.description}}
             </div>
             <a href="{{url_for('delete_workout', workoutid=workout.id)}}">delete</a>
@@ -53,6 +50,10 @@
               <div class="field">
               {{ form.description.label }}
               {{ form.description(class_="textarea") }}
+              </div>
+              <div class="dropdown">
+                {{form.area.label}}
+                {{form.area}}
               </div>
               {{ form.submit(class_="button") }}
           </form>
