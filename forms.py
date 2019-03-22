@@ -79,25 +79,32 @@ class LoginForm(Form):
 class WorkoutForm(Form):
     # name = TextField("By:")
     name = TextField("Title")
-    description = TextAreaField("Content")
+    description = TextAreaField("Content", validators=[DataRequired()])
     submit = SubmitField('Create Workout')
 
 
 class EditWorkoutForm(Form):
     name = TextField("By:")
     title = TextField("Title")
-    description = TextAreaField("Content")
+    description = TextAreaField("Content", validators=[DataRequired()])
     submit = SubmitField('Edit Workout')
-<<<<<<< HEAD
 
 
 class UpdateUserForm(Form):
     # username = TextField("Username")
     # email = TextField("Email")
     # name = TextField("Name")
-    height = IntegerField()
-    weight = IntegerField()
-    goal = TextAreaField("Goal")
+    height = IntegerField(
+        'Height',
+        validators=[
+            NumberRange(min= 36, max=99, message='Incorrect input. Height must be greater than 36 inches and less than 99 inches')
+        ]
+        )
+    weight = IntegerField(
+        'Weight',
+        validators = [
+            NumberRange(min= None, max=999, message='Please input a weight less than 1000 pounds')
+        ]
+        )
+    goal = TextAreaField("Goal", validators=[DataRequired()])
     submit = SubmitField('Edit Profile')
-=======
->>>>>>> 5b739e312ae3432f5fcb04083e7f555d7b0d9ce5

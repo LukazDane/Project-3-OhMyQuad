@@ -42,25 +42,9 @@
       {% endfor %}
      
 
-      <section>
-        <h2>Add workouts</h2>
-          
-          <form method="POST" action="" novalidate>
-              {{ form.hidden_tag() }}
-              <div class="field">
-              {{ form.name.label }}
-              {{current_user.username}}
-              <!-- {{ form.name(class_="input") }} -->
-              </div>
-              <div class="field">
-              {{ form.description.label }}
-              {{ form.description(class_="textarea") }}
-              </div>
-              {{ form.submit(class_="button") }}
-              
-          </form>
-      </section>
-      
+   
+
+      <a href="{{url_for('add_workout')}}">Add</a>
     </div>
   </div>
 </div>
