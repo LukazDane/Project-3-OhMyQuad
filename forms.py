@@ -88,3 +88,13 @@ class EditWorkoutForm(Form):
     title = TextField("Title")
     description = TextAreaField("Content")
     submit = SubmitField('Edit Workout')
+
+
+class UpdateUserForm(Form):
+    # username = TextField("Username")
+    # email = TextField("Email")
+    # name = TextField("Name")
+    height = IntegerField()
+    weight = IntegerField()
+    goal = TextAreaField("Goal")
+    submit = SubmitField('Edit Profile')
