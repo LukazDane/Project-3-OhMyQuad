@@ -1,7 +1,9 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/forms.cpython-37.pyc
 *.py[cod]
-__pycache__
+__pycache__/
+env/
+
 # C extensions
 *.so
 
