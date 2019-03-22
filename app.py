@@ -112,6 +112,27 @@ def profile():
     # return render_template('profile.html',title="Dashboard", name=name)
 
 
+## =======================================================
+## EDIT PROFILE ROUTE
+## =======================================================
+
+@app.route('/editProfile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    form= forms.UpdateUserForm()
+    user = models.User.get(current_user.id)
+    if form.validate_on_submit():
+        user.height = form.height.data
+        user.weight = form.weight.data
+        user.goal = form.goal.data
+        user.save()
+        flash('Your Profile has been updated.') # redirects the user back to the profile page after the form is submitted
+        return redirect(url_for('profile'))
+
+    return render_template('edit_profile.html', form = form)
+    # return render_template('profile.html',title="Dashboard", name=name)
+
+
 @app.route('/register', methods = ('GET', 'POST'))
 def register():
     form = forms.RegisterForm() # importing the RegisterFrom from forms.py
