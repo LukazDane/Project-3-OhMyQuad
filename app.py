@@ -75,19 +75,22 @@ def edit_workout(workoutid):
     form.description.data = workout.description
     return render_template("edit_workout.html", user=current_user, form=form)
 
-# @app.route("/profile/addworkout", methods=['GET', 'POST'])
-# @login_required
-# def add_workout():
-#     form = forms.WorkoutForm()
-#     workouts = models.Workout.select().where(models.Workout.user == current_user.id)
-#     print('in profile')
-#     if form.validate_on_submit():
-#         models.Workout.create(
-#         name=form.name.data.strip(),
-#         description=form.description.data.strip(), 
-#         user = current_user.id)
-#         return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
-#     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+@app.route("/addworkout", methods=['GET', 'POST'])
+@login_required
+def add_workout():
+    form = forms.WorkoutForm()
+    workouts = models.Workout.select().where(models.Workout.user == current_user.id)
+    print('in profile')
+    if form.validate_on_submit():
+        models.Workout.create(
+        name=form.name.data.strip(),
+        description=form.description.data.strip(), 
+        user = current_user.id)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+
+    #form.name.data = workout.name
+    #form.description.data = workout.description
+    return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
 
 @app.route("/profile/")
 @app.route("/profile", methods=['GET', 'POST'])

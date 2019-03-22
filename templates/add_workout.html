@@ -1,14 +1,15 @@
 {% extends "layout.html" %} {% block body %}
+<h1>Add a new workout</h1>
 <form method="POST" action="" novalidate>
-        {{ form.hidden_tag() }}
-        <div class="field">
-        {{ form.name.label }}
-        {{ form.name(class_="input") }}
-        </div>
-        <div class="field">
-        {{ form.description.label }}
-        {{ form.description(class_="textarea") }}
-        </div>
-        {{ form.submit(class_="button") }}
-    </form>
+  {{ form.hidden_tag() }}
+  <div class="field">
+    {{ form.name.label }}
+    {{ form.name(class_="input") }}
+  </div>
+  <div class="field">
+    {{ form.description.label }}
+    {{ form.description(class_="textarea") }}
+  </div>
+  {{ form.submit(class_="button") }}
+</form>
 {% endblock %}

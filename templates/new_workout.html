@@ -1,44 +1,24 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {% block content %}
+<h1>Today's Agenda</h1>
 
-{% block content %}
-  <h1>Today's Agenda</h1>
-  
-  <div class="columns">
-    <div class="column">
-      <h2>Add a New Workout</h2>
-      <form method="POST" action="" novalidate>
-        {{ form.hidden_tag() }}
+<div class="columns">
+  <div class="column">
+    <h2>Add a New Workout</h2>
+    <form method="POST" action="" novalidate>
+      {{ form.hidden_tag() }}
 
-        <div class="field">
-          {{ form.name.label }}
-          {{ form.name(class_="input") }}
-        </div>
-        <div class="field">
-          {{ form.description.label }}
-          {{ form.description(class_="textarea") }}
-        </div>
+      <div class="field">
+        {{ form.name.label }}
+        {{ form.name(class_="input") }}
+      </div>
+      <div class="field">
+        {{ form.description.label }}
+        {{ form.description(class_="textarea") }}
+      </div>
 
-        {{ form.submit(class_="button") }}
-      </form>
-    </div>
+      {{ form.submit(class_="button") }}
+    </form>
   </div>
-
-
-  {% if posts %}
-    <h1>Post List</h1>
-    {% for post in posts %}
-    <article class="message is-primary">
-        <div class="message-header">
-            <a href={{url_for('posts', id=post.id)}}>{{post.title}}</a>
-            
-            <p>By: {{post.user}}</p>
-        </div>
-        <div class="message-body">
-            {{post.text}}
-        </div>
-        <a>r/{{post.sub}}</a>
-    </article>
-    {% endfor %}
-  {% endif %}
+</div>
 
 {% endblock %}

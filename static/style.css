@@ -4,6 +4,9 @@
 * {
   box-shadow: border-box;
 }
+.main {
+  padding: 0;
+}
 .body {
   z-index: -999;
 }
