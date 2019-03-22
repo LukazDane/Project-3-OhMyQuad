@@ -73,7 +73,7 @@ def delete_workout(workoutid):
 @app.route("/editworkout/<workoutid>", methods=["GET", "POST"])
 @login_required
 def edit_workout(workoutid):
-    workout = models.Workout.get(workoutid)
+    workout = models.Workout.get(models.Workout.id == workoutid)
     form = forms.WorkoutForm()
     if form.validate_on_submit():
         workout.name = form.name.data
