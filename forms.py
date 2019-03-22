@@ -88,6 +88,7 @@ class EditWorkoutForm(Form):
     title = TextField("Title")
     description = TextAreaField("Content")
     submit = SubmitField('Edit Workout')
+<<<<<<< HEAD
 
 
 class UpdateUserForm(Form):
@@ -98,3 +99,5 @@ class UpdateUserForm(Form):
     weight = IntegerField()
     goal = TextAreaField("Goal")
     submit = SubmitField('Edit Profile')
+=======
+>>>>>>> 535cf3c8d15544d4049c01ac1fb7e55ba6217933
