@@ -86,19 +86,22 @@ def edit_workout(workoutid):
     form.description.data = workout.description
     return render_template("edit_workout.html", user=current_user, form=form)
 
-# @app.route("/profile/addworkout", methods=['GET', 'POST'])
-# @login_required
-# def add_workout():
-#     form = forms.WorkoutForm()
-#     workouts = models.Workout.select().where(models.Workout.user == current_user.id)
-#     print('in profile')
-#     if form.validate_on_submit():
-#         models.Workout.create(
-#         name=form.name.data.strip(),
-#         description=form.description.data.strip(), 
-#         user = current_user.id)
-#         return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
-#     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+@app.route("/addworkout", methods=['GET', 'POST'])
+@login_required
+def add_workout():
+    form = forms.WorkoutForm()
+    workouts = models.Workout.select().where(models.Workout.user == current_user.id)
+    print('in profile')
+    if form.validate_on_submit():
+        models.Workout.create(
+        name=form.name.data.strip(),
+        description=form.description.data.strip(), 
+        user = current_user.id)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+
+    #form.name.data = workout.name
+    #form.description.data = workout.description
+    return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
 
 @app.route("/profile/")
 @app.route("/profile", methods=['GET', 'POST'])
@@ -136,42 +139,11 @@ def edit_profile():
     return render_template('edit_profile.html', form = form)
     # return render_template('profile.html',title="Dashboard", name=name)
 
-<<<<<<< HEAD
-## =======================================================
-## ABOUT ROUTE
-## =======================================================
-
-@app.route("/about")
-def about(name=None):
-    return render_template('about.html',title="About Us", name=name)
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     error = None
-#     if request.method == 'POST':
-#         if request.form['username'] != app.config['USERNAME']:
-#             error = 'Invalid username'
-#         elif request.form['password'] != app.config['PASSWORD']:
-#             error = 'Invalid password'
-#         else:
-#             session['logged_in'] = True
-#             flash('You were logged in')
-#             return redirect(url_for('index'))
-#     return render_template('login.html', error=error)
-
-
-# @app.route('/logout')
-# def logout():
-#     session.pop('logged_in', None)
-#     flash('You were logged out')
-#     return redirect(url_for('index'))
-  # The root route will revert back to a simpler version that just returns some text
-=======
->>>>>>> 535cf3c8d15544d4049c01ac1fb7e55ba6217933
 
 ## =======================================================
 ## REGISTER ROUTE
 ## =======================================================
+
 
 @app.route('/register', methods = ('GET', 'POST'))
 def register():
@@ -277,15 +249,7 @@ def about(name=None):
 
 
 
-# @app.route("/about")
-# def about():
-#     return 'About Page!'
 
-
-# The root route will revert back to a simpler version that just returns some text
-
-
-# ...
 if __name__ == '__main__':
     models.initialize()
 

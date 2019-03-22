@@ -4,7 +4,7 @@
   <div class="column is-one-quarter user">
     <img class="prof-img-a" src="/static/default.jpg" />
     <h1>{{ current_user.username }}</h1>
-    <a href="{{url_for('edit_profile')}}">Edit</a>
+    <a href="{{url_for('edit_profile')}}">Edit Profile</a>	
     <hr />
     <div class="stats-container">
       <p class="stats">Height: {{ current_user.height }}</p>
@@ -16,6 +16,7 @@
   </div>
   <div class="column is-three-quarters">
     <h1>Your Workouts</h1>
+    
     <hr />
     {% for workout in workouts %}
     {% if workout %}
@@ -32,17 +33,18 @@
             </div>
             <a href="{{url_for('delete_workout', workoutid=workout.id)}}">delete</a>
             <a href="{{url_for('edit_workout', workoutid=workout.id)}}">Edit</a>
+            <!-- <a href="{{url_for('add_workout', workoutid=workout.id)}}">Add</a> -->
+
         </article>
 
       </div>
       {%else %}
       <div class="workout">You have no workouts to display</div>
-       <div><button class="add" type="submit">+</button></div>
-      {% endif %}
+      <div><button class="add" type="submit">+</button></div>       </button></div>
+      {% endif %}      
       {% endfor %}
-     
-
-      <section>
+      <a href="{{url_for('add_workout')}}">Add</a>	
+      <!-- <section>
         <h2>Add workouts</h2>
           
           <form method="POST" action="" novalidate>
@@ -50,7 +52,7 @@
               <div class="field">
               {{ form.name.label }}
               {{current_user.username}}
-              <!-- {{ form.name(class_="input") }} -->
+               {{ form.name(class_="input") }}
               </div>
               <div class="field">
               {{ form.description.label }}
@@ -59,7 +61,7 @@
               {{ form.submit(class_="button") }}
               
           </form>
-      </section>
+      </section> -->
       
     </div>
   </div>
