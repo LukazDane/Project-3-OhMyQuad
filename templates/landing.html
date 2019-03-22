@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {%block body%} {% if current_user.is_authenticated%}
+{% else %}
+<div class="content-overlay content-container">
+  <div class="content">
+    <img class="logo" src="/static/omq.png" />
+  </div>
+  <video autoplay muted loop id="myVideo">
+    <source src="/static/workout.mp4" type="video/mp4" />
+  </video>
+</div>
+{% endif %}
+<!-- <div class="stats">
+  <div class="statcontent">
+    <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+  </div>
+  <div class="statcontent">
+    <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+  </div>
+  <div class="statcontent">
+    <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+  </div>
+</div> -->
+{%endblock%}
