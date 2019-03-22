@@ -1,10 +1,23 @@
-{% extends "layout.html" %} {% block body %}
-<div style="text-align:center;">
-  <video
-    src="https://www.youtube.com/embed/Q5XvLJrW6Fg"
-    allowfullscreen=""
-    width="100%"
-    frameborder="0"
-  ></video>
+{% extends "layout.html" %} {%block body%} {% if current_user.is_authenticated%}
+{% else %}
+<div class="content-overlay content-container">
+  <div class="content">
+    <img class="logo" src="/static/omq.png" />
+  </div>
+  <video autoplay muted loop id="myVideo">
+    <source src="/static/workout.mp4" type="video/mp4" />
+  </video>
 </div>
-{% endblock %}
+{% endif %}
+<!-- <div class="stats">
+  <div class="statcontent">
+    <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+  </div>
+  <div class="statcontent">
+    <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+  </div>
+  <div class="statcontent">
+    <p>Helloasdasldkmlaksdmlaksdmalksdmlaksmdlaksmdsd</p>
+  </div>
+</div> -->
+{%endblock%}

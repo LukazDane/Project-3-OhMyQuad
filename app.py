@@ -8,7 +8,6 @@ from flask_bcrypt import check_password_hash
 import forms 
 import models
 
-
 DEBUG = True
 PORT = 9000
 
@@ -32,6 +31,7 @@ def before_request():
     # """Connect to the DB before each request."""
     g.db = models.DATABASE
     g.db.connect()
+    g.user = current_user
 
 @app.after_request
 def after_request(response):
@@ -45,10 +45,11 @@ def after_request(response):
 
 @app.route("/")
 def index(name=None):
-  if 'auth_token' in session:
-    return render_template('profile.html',title="Dashboard", name=name)
-  else: 
-    return render_template('landing.html',title="Dashboard", name=name)
+    if 'auth_token' in session:
+    
+        return redirect(url_for('profile'))
+    else: 
+        return render_template('landing.html',title="Dashboard", name=name)
 
 
 ## =======================================================
@@ -99,7 +100,7 @@ def edit_workout(workoutid):
 #         return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
 #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
-
+@app.route("/profile/")
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -135,6 +136,7 @@ def edit_profile():
     return render_template('edit_profile.html', form = form)
     # return render_template('profile.html',title="Dashboard", name=name)
 
+<<<<<<< HEAD
 ## =======================================================
 ## ABOUT ROUTE
 ## =======================================================
@@ -164,6 +166,8 @@ def about(name=None):
 #     flash('You were logged out')
 #     return redirect(url_for('index'))
   # The root route will revert back to a simpler version that just returns some text
+=======
+>>>>>>> 5b739e312ae3432f5fcb04083e7f555d7b0d9ce5
 
 ## =======================================================
 ## REGISTER ROUTE
@@ -183,7 +187,7 @@ def register():
             weight = form.weight.data,
             goal = form.goal.data
             )
-        return redirect(url_for('index')) # once the submissin is succesful, user is redirected to the index function which routes back to the home page
+        return redirect('/login') # once the submissin is succesful, user is redirected to the index function which routes back to the home page
     return render_template('register.html', form=form)
 
 
@@ -204,9 +208,10 @@ def login():
                 ## creates session
                 login_user(user) # this method comes from the flask_login package
                 flash("You've been logged in", "success")
-                return redirect(url_for('index'))
+                return redirect('/profile')
             else:
                 flash("your email or password doesn't match", "error")
+    
     return render_template('login.html', form=form)
 
 ## =======================================================
@@ -222,6 +227,56 @@ def logout():
 
 
 
+
+@app.route("/about")
+def about(name=None):
+    return render_template('about.html', name=name)
+
+
+
+# @app.route('/profile',methods=['GET', 'POST'])
+# @app.route('/profile/')
+# @app.route('/profile/<workoutid>')
+# def user():
+#     form = forms.WorkoutForm()
+#     workouts = models.Workout.select()
+    # if form.validate_on_submit():
+#         models.Workout.create(
+#         name=form.name.data.strip(),
+#         description=form.description.data.strip(), 
+#         user = current_user.id)
+    #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    # user_id = int(user)
+    # user= models.User.get(models.User.id == user_id)
+    # workouts = user.workouts
+        
+   
+    
+    # Define the form for Posts
+    
+    # 
+
+#       flash("New post created")
+    #   return redirect("/user/{}".format(workout_id))
+    # return render_template(".html", sub=sub, form=form , posts=posts)
+
+
+    
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
 # @app.route("/about")
 # def about():
 #     return 'About Page!'
@@ -233,4 +288,68 @@ def logout():
 # ...
 if __name__ == '__main__':
     models.initialize()
+
+    try:
+        models.Exercise.create_exercise(
+        name='Lat Pulldown',
+        description="4 sets, 15 Reps (1 warm-up set of 15 reps, 3 working sets of 15 reps)",
+        type='Lats'
+        )
+
+        models.Exercise.create_exercise(
+        name='Seated Cable Rows',
+        description="4 sets, 15 Reps (1 warm-up set of 15 reps, 3 working sets of 15 reps)",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Underhand Cable Pulldowns',
+        description="3 sets, 10-12 Reps",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Barbell Squat',
+        description="4 sets, 4-6 reps",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Dumbbell Lunges. ',
+        description="4 sets, 12 reps each leg",
+        type='Legs',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Leg Press. ',
+        description="3 sets, 12-15 reps",
+          type='Legs',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Underhand Cable Pulldowns',
+        description="3 sets, 10-12 Reps",
+        type='Legs',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Close-Grip Bench Press',
+        description="4 sets, 6, 6, 8, 10 reps (60-90 seconds rest)",
+        type='Lats',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='Seated Dumbell Press',
+        description="3 sets, 8, 10, 12 reps (60 seconds rest)",
+        type='Triceps',
+       
+        ),
+        models.Exercise.create_exercise(
+        name='V-Bar Pulldown',
+        description="2 sets, 10, 12 reps (60 seconds rest)",
+        type='Triceps',
+       
+        )
+    except ValueError:
+        pass
     app.run(debug=DEBUG, port=PORT)

@@ -1,10 +1,13 @@
 import datetime
+from datetime import date
+from datetime import time
+
+
+
 #import everything from peewee because we might need it 
 from peewee import *
 from flask_login import UserMixin
 from flask_bcrypt import generate_password_hash
-
-
 
 DATABASE = SqliteDatabase('ohmyquad.db')
 
@@ -18,7 +21,7 @@ class User(UserMixin, Model):
     height = IntegerField()
     weight = IntegerField()
     goal = CharField(max_length=100)
-    joined_at = DateTimeField(default=datetime.datetime.now)
+    joined_at = DateTimeField(default=date.today)
   
     class Meta:
         database = DATABASE
@@ -42,9 +45,9 @@ class User(UserMixin, Model):
 
 class Workout(Model):
     name = CharField()
+    description = TextField()
     timestamp = DateTimeField(default=datetime.datetime.now)
     user = ForeignKeyField(User, backref="workouts") 
-    description = CharField()
 
     class Meta:
         database = DATABASE
@@ -53,14 +56,23 @@ class Workout(Model):
 
 class Exercise(Model):
     name=CharField()
-    reps=IntegerField()
-    sets=IntegerField()
     description=TextField()
     type=CharField()
 
     class Meta:
         database = DATABASE
-
+    
+    @classmethod
+    def create_exercise(cls, name, description, type):
+       # print(location)
+        try:
+            cls.create(
+                name = name,
+                description = description,
+                type = type)
+        
+        except IntegrityError:
+            raise ValueError("create error")
 
 class WorkoutExercise(Model):
     exercise = ForeignKeyField(Exercise) 
@@ -69,12 +81,7 @@ class WorkoutExercise(Model):
     class Meta:
         database = DATABASE
 
-
-
-
-
-
 def initialize():
-    DATABASE.connect()
-    DATABASE.create_tables([Exercise,Workout,WorkoutExercise,User], safe=True)
-    DATABASE.close()
+   DATABASE.connect()
+   DATABASE.create_tables([Exercise,Workout,WorkoutExercise,User], safe=True)
+   DATABASE.close()

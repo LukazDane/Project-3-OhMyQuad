@@ -1,10 +1,15 @@
 /* div { */
 /* border: 1px solid black; */
+
 * {
   box-shadow: border-box;
 }
 .body {
   z-index: -999;
+}
+/* nav */
+.navbar {
+  width: 101vw !important;
 }
 .return {
   line-height: 2.5rem;
@@ -12,6 +17,7 @@
   font-size: 2.5rem;
   color: rgba(255, 245, 224, 1);
   animation: none;
+  font-family: "Black Ops One", cursive;
 }
 
 .return:hover {
@@ -22,6 +28,17 @@
   color: red;
   animation: wiggle 0.5s;
   animation-iteration-count: infinite;
+}
+.lr {
+  width: 49%;
+  display: inline-block;
+  font-family: "Black Ops One", cursive;
+  font-size: x-large;
+  color: whitesmoke;
+}
+.lr:hover {
+  color: whitesmoke;
+  text-decoration: underline;
 }
 .column {
   text-align: center;
@@ -40,16 +57,19 @@ nav .column {
   font-size: 2rem;
   margin-bottom: 2rem;
 }
-
+/* endnav */
+/* footer */
 .footer {
   padding: 0 !important;
   background-color: black !important;
   color: white !important;
   position: absolute;
   left: 0;
-  right: 0;
+  width: 101vw !important;
+  z-index: 1;
 }
-
+/* endfooter */
+/* animation */
 @keyframes wiggle {
   0% {
     transform: translate(1px, 1px) rotate(0deg);
@@ -86,12 +106,58 @@ nav .column {
   }
 }
 
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* endanimation */
+/* Landing */
 video {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+.logo {
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  margin: -70px 0 0 -170px;
+  opacity: 1;
+  animation: fade 5s linear;
+}
+.content {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0;
+}
+div.content,
+.content:not(:last-child) {
+  margin: 0;
+}
+.content-overlay {
+  height: -webkit-fill-available;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
+/* End Landing */
+/* profile  */
 .user {
   border-right: 2px solid #363636;
   padding-right: 0;
@@ -99,9 +165,26 @@ video {
 
 .prof-img-a {
   width: 100%;
-  height: 55%;
+  height: 20rem;
   overflow: hidden;
 }
+
+.workout {
+  background-color: #f7f5e2;
+  border-radius: 0 20px 0 20px;
+  margin-bottom: 2rem;
+  box-shadow: 10px 10px 5px grey;
+}
+.message-header {
+  border-radius: 0 20px 0 0;
+  background-color: #363636;
+}
+
+.message-body {
+  border-radius: 0 0 0 20px;
+  background-color: #f7f5e2;
+}
+/* end profile */
 /* About */
 img.about-img {
   border-radius: 50%;
