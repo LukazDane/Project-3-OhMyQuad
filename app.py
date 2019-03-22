@@ -139,62 +139,10 @@ def edit_profile():
     return render_template('edit_profile.html', form = form)
     # return render_template('profile.html',title="Dashboard", name=name)
 
-<<<<<<< HEAD
-## =======================================================
-## ABOUT ROUTE
-## =======================================================
-
-@app.route("/about")
-def about(name=None):
-    return render_template('about.html',title="About Us", name=name)
-
-# @app.route('/login', methods=['GET', 'POST'])
-# def login():
-#     error = None
-#     if request.method == 'POST':
-#         if request.form['username'] != app.config['USERNAME']:
-#             error = 'Invalid username'
-#         elif request.form['password'] != app.config['PASSWORD']:
-#             error = 'Invalid password'
-#         else:
-#             session['logged_in'] = True
-#             flash('You were logged in')
-#             return redirect(url_for('index'))
-#     return render_template('login.html', error=error)
-
-
-# @app.route('/logout')
-# def logout():
-#     session.pop('logged_in', None)
-#     flash('You were logged out')
-#     return redirect(url_for('index'))
-  # The root route will revert back to a simpler version that just returns some text
-=======
->>>>>>> 535cf3c8d15544d4049c01ac1fb7e55ba6217933
 
 ## =======================================================
 ## REGISTER ROUTE
 ## =======================================================
-
-## =======================================================
-## EDIT PROFILE ROUTE
-## =======================================================
-
-@app.route('/editProfile', methods=['GET', 'POST'])
-@login_required
-def edit_profile():
-    form= forms.UpdateUserForm()
-    user = models.User.get(current_user.id)
-    if form.validate_on_submit():
-        user.height = form.height.data
-        user.weight = form.weight.data
-        user.goal = form.goal.data
-        user.save()
-        flash('Your Profile has been updated.') # redirects the user back to the profile page after the form is submitted
-        return redirect(url_for('profile'))
-
-    return render_template('edit_profile.html', form = form)
-    # return render_template('profile.html',title="Dashboard", name=name)
 
 
 @app.route('/register', methods = ('GET', 'POST'))
@@ -301,15 +249,7 @@ def about(name=None):
 
 
 
-# @app.route("/about")
-# def about():
-#     return 'About Page!'
 
-
-# The root route will revert back to a simpler version that just returns some text
-
-
-# ...
 if __name__ == '__main__':
     models.initialize()
 
