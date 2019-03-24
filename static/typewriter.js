@@ -1,4 +1,4 @@
-const words = ["Fitness", "Workout", "Diet", "Whatever"];
+const words = ["Fitness", "Workout", "Diet", "Health", "Whatever"];
 let i = 0;
 let timer;
 

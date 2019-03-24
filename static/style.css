@@ -20,7 +20,7 @@
   line-height: 2.5rem;
   overflow: hidden;
   font-size: 2.5rem;
-  color: rgba(255, 245, 224, 1);
+  color: #fff;
   animation: none;
   font-family: "Black Ops One", cursive;
 }
@@ -73,6 +73,9 @@ nav .column {
   bottom: 0;
   width: 101vw !important;
   z-index: 1;
+}
+.columns:not(:last-child) {
+  margin-bottom: 0;
 }
 /* endfooter */
 /* animation */
@@ -158,6 +161,9 @@ video {
   min-width: 100%;
   min-height: 100%;
 }
+.content h1 {
+  color: white;
+}
 .notfound {
   position: absolute;
   right: 0;
@@ -210,13 +216,44 @@ div.content,
 /* End Landing */
 
 /* login form */
+.login-container {
+  background-image: url("/static/login.png");
+  background-size: cover;
+  height: -webkit-fill-available;
+}
 form.login {
-  height: 100px;
-  width: 100px;
+  border: 1px solid black;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  height: 9em;
+  width: 5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
 }
 /* end login */
 /* register form */
+form.register {
+  border: 1px solid black;
+  position: absolute;
+  /* top: 20%;
+  left: 20%; */
+  /* height: 9em; */
+  width: 5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5em;
+  z-index: 1;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
 
+.register div {
+  display: flex;
+}
+.register h1 {
+  color: #fff !important;
+}
 /* end register */
 /* profile  */
 .user {

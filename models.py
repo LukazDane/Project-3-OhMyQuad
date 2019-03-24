@@ -22,7 +22,7 @@ class User(UserMixin, Model):
     height = IntegerField()
     weight = IntegerField()
     goal = CharField(max_length=100)
-    joined_at = DateTimeField(default=date.strftime)
+    joined_at = DateTimeField(default=date.today().strftime("%Y-%m-%d"))
     class Meta:
         database = DATABASE
         order_by = ('-timestamp',)
