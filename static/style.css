@@ -6,9 +6,11 @@
 }
 .main {
   padding: 0 !important;
+  margin: 0;
 }
 .body {
   z-index: -999;
+  margin: 0;
 }
 /* nav */
 .navbar {
@@ -66,8 +68,9 @@ nav .column {
   padding: 0 !important;
   background-color: black !important;
   color: white !important;
-  position: absolute;
+  position: fixed;
   left: 0;
+  bottom: 0;
   width: 101vw !important;
   z-index: 1;
 }
@@ -120,10 +123,43 @@ nav .column {
     opacity: 1;
   }
 }
-/* endanimation */
+
+/* The typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: blue;
+  }
+}
+/* end animation */
 /* Landing */
+.test {
+  display: flex;
+  padding-top: 5em;
+  justify-content: center;
+}
 video {
-  position: fixed;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+.notfound {
+  position: absolute;
   right: 0;
   bottom: 0;
   min-width: 100%;
@@ -140,6 +176,11 @@ video {
   opacity: 1;
   animation: fade 5s linear;
 }
+
+.content.logo {
+  color: white;
+}
+
 .content {
   position: fixed;
   right: 0;
@@ -155,14 +196,24 @@ div.content,
   margin: 0;
 }
 .content-overlay {
-  height: -webkit-fill-available;
+  /* height: -webkit-fill-available; */
   background-color: rgba(0, 0, 0, 0.5);
 }
-
+.blink {
+  animation: blink 0.5s infinite;
+}
+@keyframes blink {
+  to {
+    opacity: 0;
+  }
+}
 /* End Landing */
 
 /* login form */
-
+form.login {
+  height: 100px;
+  width: 100px;
+}
 /* end login */
 /* register form */
 
@@ -181,6 +232,12 @@ div.content,
   height: 20rem;
   overflow: hidden;
 }
+a > .fa-plus-square {
+  color: #363636;
+}
+a > .fa-plus-square:hover {
+  color: red;
+}
 .stats-container {
   border: 1px solid black;
   background-color: #f7f5e2;
@@ -189,6 +246,12 @@ div.content,
   font-family: monospace;
   font-size: x-large;
   padding-left: 1em;
+}
+.workouts {
+  overflow: scroll;
+}
+.message-title {
+  text-overflow: ellipsis;
 }
 .message-header > a > i {
   position: relative;
@@ -202,6 +265,9 @@ div.content,
   margin-bottom: 2rem;
   box-shadow: 10px 10px 5px grey;
 }
+.message {
+  border-radius: 0 20px 0 20px;
+}
 .message-header {
   border-radius: 0 20px 0 0;
   background-color: #363636;
@@ -210,6 +276,28 @@ div.content,
 .message-body {
   border-radius: 0 0 0 20px;
   background-color: #f7f5e2;
+  border-width: 0;
+}
+
+.user-edit {
+  text-align: right;
+  font-size: large;
+}
+
+.user-edit > a {
+  border-bottom: 1px solid #363636;
+  border-radius: 10px 10px 0 0;
+  color: white;
+  background-color: #363636;
+  padding: 2px;
+}
+
+.user-edit > a:hover {
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 1s linear;
+  color: red;
 }
 /* end profile */
 /* edit workout form */
@@ -235,7 +323,7 @@ img.about-img {
 }
 
 .columns {
-  position: relative;
+  /* position: relative; */
   width: 100%;
   /* overflow: hidden; */
   display: flex;

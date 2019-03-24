@@ -1,6 +1,7 @@
 import datetime
 from datetime import date
 from datetime import time
+from datetime import datetime, timedelta
 
 
 
@@ -21,8 +22,7 @@ class User(UserMixin, Model):
     height = IntegerField()
     weight = IntegerField()
     goal = CharField(max_length=100)
-    joined_at = DateTimeField(default=date.today)
-  
+    joined_at = DateTimeField(default=date.strftime)
     class Meta:
         database = DATABASE
         order_by = ('-timestamp',)
@@ -42,11 +42,10 @@ class User(UserMixin, Model):
             )
         except IntegrityError:
             raise ValueError("User already exists")
-
 class Workout(Model):
-    name = CharField()
+    name = CharField(max_length=10)
     description = TextField()
-    timestamp = DateTimeField(default=datetime.datetime.now)
+    timestamp = DateTimeField(default=datetime.now().strftime("%Y-%m-%d %H:%M"))
     user = ForeignKeyField(User, backref="workouts") 
 
     class Meta:

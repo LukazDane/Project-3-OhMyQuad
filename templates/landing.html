@@ -1,8 +1,16 @@
 {% extends "layout.html" %} {%block body%} {% if current_user.is_authenticated%}
 {% else %}
+<!-- <scripts type="text/javascript" src="/static/typewriter.js"></scripts> -->
 <div class="content-overlay content-container">
-  <div class="content">
-    <img class="logo" src="/static/omq.png" />
+  <div class="content test">
+    <h1>
+      Your Personal
+
+      <span class="header-sub-title" id="word"></span>
+      <span class="header-sub-title blink">|</span>
+      Journal
+    </h1>
+    <!-- <img class="logo" src="/static/omq.png" /> -->
   </div>
   <video autoplay muted loop id="myVideo">
     <source src="/static/workout.mp4" type="video/mp4" />
@@ -21,3 +29,4 @@
   </div>
 </div> -->
 {%endblock%}
+<script></script>

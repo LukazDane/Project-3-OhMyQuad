@@ -94,7 +94,7 @@ def add_workout():
     print('in profile')
     if form.validate_on_submit():
         models.Workout.create(
-        name=form.name.data.strip(),
+        name=form.name.data,
         description=form.description.data.strip(), 
         user = current_user.id)
         return render_template("profile.html", user=current_user, form=form, workouts=workouts)
@@ -205,7 +205,9 @@ def about(name=None):
     return render_template('about.html', name=name)
 
 
-
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 # @app.route('/profile',methods=['GET', 'POST'])
 # @app.route('/profile/')
 # @app.route('/profile/<workoutid>')
