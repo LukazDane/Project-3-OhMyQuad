@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm as Form
 
-from wtforms import TextField, TextAreaField, SubmitField, StringField, PasswordField, IntegerField, SelectField
+from wtforms import TextField, TextAreaField, SubmitField, StringField, PasswordField, IntegerField
+from wtforms import SelectField
 
 from wtforms.validators import (DataRequired, Regexp, ValidationError, Email, Length, EqualTo, NumberRange)
 
@@ -80,13 +81,21 @@ class WorkoutForm(Form):
     # name = TextField("By:")
     name = TextField("Title")
     description = TextAreaField("Content")
-    area = TextAreaField("Area")
     submit = SubmitField('Create Workout')
-    search = SubmitField('Search')
-    
+
 
 class EditWorkoutForm(Form):
     name = TextField("By:")
     title = TextField("Title")
     description = TextAreaField("Content")
     submit = SubmitField('Edit Workout')
+
+
+class UpdateUserForm(Form):
+    # username = TextField("Username")
+    # email = TextField("Email")
+    # name = TextField("Name")
+    height = IntegerField()
+    weight = IntegerField()
+    goal = TextAreaField("Goal")
+    submit = SubmitField('Edit Profile')

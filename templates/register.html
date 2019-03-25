@@ -1,14 +1,23 @@
 {% extends "layout.html" %} {% block body %}
-<form method="POST" action="" class="form">
-  {{ form.hidden_tag() }}
-  {% for field in form %}
-  <div class="field">
-    {% if field.errors %} {% for error in field.errors %}
-    <div class="notification error">{{ error }}</div>
-    {% endfor %} {% endif %}
-    {{ field(placeholder=field.label.text) }}
-  </div>
-  {% endfor %}
-  <button type="submit" id="submit">Register!</button>
-</form>
+<div class="register-container">
+  <form method="POST" action="" class="form register">
+    <h1>Register</h1>
+    <hr />
+    {{ form.hidden_tag() }}
+    {% for field in form %}
+    <div class="field">
+      {% if field.errors %} {% for error in field.errors %}
+      <div class="notification error">{{ error }}</div>
+      {% endfor %} {% endif %}
+      {{ field(placeholder=field.label.text) }}
+    </div>
+    {% endfor %}
+    <button type="submit" id="submit">Register!</button>
+  </form>
+</div>
+<video autoplay muted loop id="myVideo">
+  <source src="/static/register.mp4" type="video/mp4" />
+</video>
+</div>
+</div>
 {% endblock %}
