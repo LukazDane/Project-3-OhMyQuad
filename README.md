@@ -59,22 +59,25 @@
 
 #### Contributions
 
-- [what you did]
-- [insert code screenshot here]
+- Built create functionality for the workout model and implented the stripe API on donation page and styled it. Added video hero for the landing page.
+<!-- - [insert code screenshot here] -->
 - [describe the code snippet you chose]
 
 #### Challenges
 
-- [challange 1]
-- [challange 2]
+- Excercise table that will populate the workout box using a joined table
+- Writing the correct function and queries to target the right data and pull it into the intended location.
 
 #### Shout out
 
-- []
+- Team(for persevering and working hard)
+-Isha(for the support on creating the crud functionalities and detailed explanations on complex concepts )
+-Dalton(for dealing with questions and being available remotely even on the weekends)
 
 #### Moving Forward
 
-- []
+- Re-attempt to solve the exercise table challenge and make it functional. 
+- Shoot a custom original video and replace the current video.
 
 #### Landing
 
