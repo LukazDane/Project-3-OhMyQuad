@@ -4,13 +4,21 @@ from flask import make_response as response
 from forms import WorkoutForm
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
-
+from peewee import fn
+import os
+import stripe
 import forms 
 import models
 
 DEBUG = True
 PORT = 9000
 
+
+stripe_keys = {
+  'secret_key': os.environ['SECRET_KEY'],
+  'publishable_key': os.environ['PUBLISHABLE_KEY']
+}
+stripe.api_key = stripe_keys['secret_key']
 app = Flask(__name__)
 app.secret_key = 'elsdhfsdlfdsjfkljdslfhjlds'
 
@@ -46,6 +54,30 @@ def index(name=None):
         return redirect(url_for('profile'))
     else: 
         return render_template('landing.html',title="Dashboard", name=name)
+
+@app.route('/donations')
+def donations():
+    return render_template('stripe.html', key=stripe_keys['publishable_key'])
+
+@app.route('/charge', methods=['POST'])
+def charge():
+    # Amount in cents
+    amount = 500
+
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        source=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='usd',
+        description='Flask Charge'
+    )
+
+    return render_template('charge.html', amount=amount)
+
 
 
 @app.route("/profile/<workoutid>")
@@ -89,20 +121,30 @@ def edit_workout(workoutid):
 #         return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
 #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
+@app.route('/area')
+def test():
+    print('testing')
+    for key in request.form:
+        print(key)
+    return 'test'
+
 @app.route("/profile/")
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
+    
     form = forms.WorkoutForm()
     workouts = models.Workout.select().where(models.Workout.user == current_user.id)
-    
+    tags = models.Exercise.select(fn.DISTINCT(models.Exercise.area))
+    exercises = models.Exercise.select()
+    print(tags)
     if form.validate_on_submit():
         models.Workout.create(
         name=form.name.data.strip(),
         description=form.description.data.strip(), 
         user = current_user.id)
-        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
-    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts, exercises = exercises)
+    return render_template("profile.html",exercises = exercises, user=current_user, tags=tags, form=form, workouts=workouts)
 
 
 
@@ -157,78 +199,43 @@ def logout():
 
 
 @app.route("/about")
-<<<<<<< HEAD
-def about():
-    return 'About Page!'
-
-
-
-@app.route('/profile',methods=['GET', 'POST'])
-def user():
-    form = forms.WorkoutForm()
-    workouts = models.Workout.select()
-    if form.validate_on_submit():
-        models.Workout.create(
-        name=form.name.data.strip(),
-        description=form.description.data.strip(),
-        area = form.area.data.strip(),
-        user = current_user.id)
-
-        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
-    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
-=======
 def about(name=None):
     return render_template('about.html', name=name)
 
 
 
-# @app.route('/profile',methods=['GET', 'POST'])
-# @app.route('/profile/')
-# @app.route('/profile/<workoutid>')
-# def user():
-#     form = forms.WorkoutForm()
-#     workouts = models.Workout.select()
-    # if form.validate_on_submit():
-#         models.Workout.create(
-#         name=form.name.data.strip(),
-#         description=form.description.data.strip(), 
-#         user = current_user.id)
-    #     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
-    # return render_template("profile.html", user=current_user, form=form, workouts=workouts)
->>>>>>> 5b739e312ae3432f5fcb04083e7f555d7b0d9ce5
-    # user_id = int(user)
-    # user= models.User.get(models.User.id == user_id)
-    # workouts = user.workouts
-        
-   
-    
-    # Define the form for Posts
-    
-    # 
+@app.route('/profile',methods=['GET', 'POST'])
+@app.route('/profile/')
+@app.route('/profile/<workoutid>')
+def user():
+    print('profirl')
+    form = forms.WorkoutForm()
 
-#       flash("New post created")
-    #   return redirect("/user/{}".format(workout_id))
-    # return render_template(".html", sub=sub, form=form , posts=posts)
+    workouts = models.Workout.select()
+    if form.validate_on_submit():
+        models.Workout.create(
+        name=form.name.data.strip(),
+        description=form.description.data.strip(),
+        area= form.description.data.strip(),
+        user = current_user.id)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    user_id = int(user)
+    user= models.User.get(models.User.id == user_id)
+    workouts = user.workouts
 
+@app.route('/workouts')
+@app.route('/workouts/<id>',methods=['GET', 'POST'])
+def workout(id=None):
 
-    
-    
-    
+    workout_id = int(id)
+    workout = models.Workout.get(models.Workout.id == workout_id)
+      
+        #flash("New post created")
+    # return redirect("/workouts/{}".format(workout_id))
+    return render_template("workouts.html".format(workout_id))
     
 
-
-
-
-
-
-
-
-
-
-
-# @app.route("/about")
-# def about():
-#     return 'About Page!'
 
 
 # The root route will revert back to a simpler version that just returns some text
