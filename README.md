@@ -59,9 +59,10 @@
 
 #### Contributions
 
-- Built create functionality for the workout model and implented the stripe API on donation page and styled it. Added video hero for the landing page.
+- Built create functionality for the workout model. 
+- Implented the stripe API on donation page and styled it. Added video hero for the landing page.
 <!-- - [insert code screenshot here] -->
-- [describe the code snippet you chose]
+
 
 #### Challenges
 
