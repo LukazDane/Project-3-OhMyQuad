@@ -1,6 +1,14 @@
 # Project-3-OhMyQuad
 
-- Fitness Journal
+- A personal, fitness-themed online journal. Users are able to create/edit a profile and journal entries to track their personal health/fitness goals.
+
+## Planned Premium Features:
+
+- Post Type to choose betweeen workout, diet, or mental health focused post.
+- Exercise select drop down
+- Recipe tracker
+- Multiple image upload
+- Spotify playlist intergration
 
 # Leo
 
