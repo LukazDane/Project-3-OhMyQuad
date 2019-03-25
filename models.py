@@ -1,7 +1,8 @@
 import datetime
 from datetime import date
 from datetime import time
-
+from datetime import datetime, timedelta
+from wtforms import SelectField
 
 
 #import everything from peewee because we might need it 
@@ -21,8 +22,7 @@ class User(UserMixin, Model):
     height = IntegerField()
     weight = IntegerField()
     goal = CharField(max_length=100)
-    joined_at = DateTimeField(default=date.today)
-  
+    joined_at = DateTimeField(default=date.today().strftime("%Y-%m-%d"))
     class Meta:
         database = DATABASE
         order_by = ('-timestamp',)
@@ -42,12 +42,13 @@ class User(UserMixin, Model):
             )
         except IntegrityError:
             raise ValueError("User already exists")
-
 class Workout(Model):
-    name = CharField()
+    name = CharField(max_length=10)
     description = TextField()
-    timestamp = DateTimeField(default=datetime.datetime.now)
-    user = ForeignKeyField(User, backref="workouts") 
+    timestamp = DateTimeField(default=datetime.now().strftime("%Y-%m-%d %H:%M"))
+    user = ForeignKeyField(User, backref="workouts")
+    # area = SelectField(u'Area of Focus: ', choices=[('cpp', 'Chest'), ('py', 'Arms'), ('text', 'Legs')])
+ 
 
     class Meta:
         database = DATABASE
