@@ -72,8 +72,8 @@
 #### Shout out
 
 - Team(for persevering and working hard)
--Isha(for the support on creating the crud functionalities and detailed explanations on complex concepts )
--Dalton(for dealing with questions and being available remotely even on the weekends)
+- Isha(for the support on creating the crud functionalities and detailed explanations on complex concepts )
+- Dalton(for dealing with questions and being available remotely even on the weekends)
 
 #### Moving Forward
 
