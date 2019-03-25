@@ -80,18 +80,13 @@ class WorkoutForm(Form):
     # name = TextField("By:")
     name = TextField("Title")
     description = TextAreaField("Content")
+    area = TextAreaField("Area")
     submit = SubmitField('Create Workout')
-
+    search = SubmitField('Search')
+    
 
 class EditWorkoutForm(Form):
     name = TextField("By:")
     title = TextField("Title")
     description = TextAreaField("Content")
-<<<<<<< HEAD
-    # area = TextAreaField("Area")
-    area = SelectField('Select Area To Work On',
-           choices = [('sdfsdf','Lats'), ('sdfsdf', 'Legs'), ('sdfsdf', 'Back')])
-    submit = SubmitField('Create Workout')
-=======
     submit = SubmitField('Edit Workout')
->>>>>>> 5b739e312ae3432f5fcb04083e7f555d7b0d9ce5

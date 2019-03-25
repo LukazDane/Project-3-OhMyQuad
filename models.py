@@ -48,6 +48,8 @@ class Workout(Model):
     description = TextField()
     timestamp = DateTimeField(default=datetime.datetime.now)
     user = ForeignKeyField(User, backref="workouts") 
+    # workoutexercise = ForeignKeyField(WorkoutExercise, backref="workouts")
+
 
     class Meta:
         database = DATABASE
@@ -75,8 +77,8 @@ class Exercise(Model):
             raise ValueError("create error")
 
 class WorkoutExercise(Model):
-    exercise = ForeignKeyField(Exercise) 
-    workout = ForeignKeyField(Workout) 
+    exercise = ForeignKeyField(Exercise)
+    user = ForeignKeyField(Exercise)  
 
     class Meta:
         database = DATABASE

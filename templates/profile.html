@@ -21,7 +21,7 @@
     <div class="workout">
         <article class="message ">
             <div class="message-header">
-                {{workout.name}}
+                <a href={{url_for('workout', id=workout.id)}}>{{workout.name}}</a>
             </div>
             <div class="message-body">
                 {{workout.description}}
@@ -46,7 +46,7 @@
               <div class="field">
               {{ form.name.label }}
               {{current_user.username}}
-              <!-- {{ form.name(class_="input") }} -->
+              {{ form.name(class_="input") }}
               </div>
               <div class="field">
               {{ form.description.label }}
@@ -56,7 +56,20 @@
                 {{form.area.label}}
                 {{form.area}}
               </div>
-              {{ form.submit(class_="button") }}
+              <div><select name="tag_select" method='POST' onchange="if(this.value) document.getElementById('hidden_area').value = this.value">
+                  {% for tag in tags %}
+                    <option value="{{tag.area}}" SELECTED>{{tag.area}}</option>
+ 
+                  {% endfor %}
+                  <input type="text" id="hidden_area"/>
+                  <a href="{{url_for('test')}}">Search</a>
+                  {{ form.submit(class_="button") }}
+                </select>
+ 
+ 
+              </div>
+                {{ form.submit(class_="button") }}</div>
+      
               
           </form>
       </section>
