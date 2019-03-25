@@ -2,7 +2,7 @@ import datetime
 from datetime import date
 from datetime import time
 from datetime import datetime, timedelta
-
+from wtforms import SelectField
 
 
 #import everything from peewee because we might need it 
@@ -46,7 +46,9 @@ class Workout(Model):
     name = CharField(max_length=10)
     description = TextField()
     timestamp = DateTimeField(default=datetime.now().strftime("%Y-%m-%d %H:%M"))
-    user = ForeignKeyField(User, backref="workouts") 
+    user = ForeignKeyField(User, backref="workouts")
+    # area = SelectField(u'Area of Focus: ', choices=[('cpp', 'Chest'), ('py', 'Arms'), ('text', 'Legs')])
+ 
 
     class Meta:
         database = DATABASE

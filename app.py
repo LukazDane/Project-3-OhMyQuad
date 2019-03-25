@@ -97,6 +97,7 @@ def add_workout():
         name=form.name.data,
         description=form.description.data.strip(), 
         user = current_user.id)
+
         return render_template("profile.html", user=current_user, form=form, workouts=workouts)
 
     #form.name.data = workout.name
