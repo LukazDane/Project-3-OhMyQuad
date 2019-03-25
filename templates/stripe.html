@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="stripe">
+<div class="columns is-multiline">
+  <div class= "stripe-title column is-full"
+  <h1>HELP US KEEP THE LIGHTS ON</h1>
+  
+  <div class=" column is-two-fifths">
+    <div class="card">
+        <div class="card-image" style="height:459px;">
+          
+            <img src="../static/donationcard.jpg" alt="Placeholder image">
+          
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="../static/stripe.png" alt="Placeholder image">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-6">Powered By:</p>
+              <p class="subtitle is-6">Stripe</p>
+            </div>
+          </div>
+      
+          <div class="text">
+              <div class="stripee" action="/charge" method="post">
+                <article>
+                  <label>
+                    <span>Make A Difference</span>
+                    <p class="subtitle is-6">All proceeds go to keeping this web app up and running.</p>
+                  </label>
+                </article>
+            
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="{{ key }}"
+                        data-description="A Flask Charge"
+                        data-amount="500"
+                        data-locale="auto"></script>
+              </div>
+            <br>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+  
+  <div class="">
+    <img src="" alt="">
+    <img src="" alt="">
+    <img src="" alt="">
+  </div>
+  </div>
+</div>
+{% endblock %}
