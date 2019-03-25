@@ -2,7 +2,7 @@
 
 - Fitness Journal
 
-### Leo
+# Leo
 
 #### Contributions
 
@@ -24,7 +24,7 @@
 
 - Dive a little more into designing the site with css
 
-### Luke
+# Luke
 
 #### Contributions
 
@@ -47,7 +47,7 @@
 
 - Add image upload, re-add broken exercise button, restyle profile page(and its add/edit extensions), edit all forms and models to include the exercise(choices)
 
-### Tristan
+# Tristan
 
 #### Contributions
 
