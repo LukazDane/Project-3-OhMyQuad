@@ -537,3 +537,37 @@ button.dropdown-item:hover {
   color: #fff;
   font-size: x-large;
 }
+form {
+  
+  text-align:center;
+}
+.stripe{
+  background-image:url("./donationbg.jpg");
+  height:200vh;
+  background-position: center center;
+  background-repeat:  no-repeat;
+  background-attachment: fixed;
+  background-size:  cover;
+}
+.card {
+  height:50px;
+  width:30x;
+  background-color:white;
+  margin-top:100px;
+  display: block;
+  
+  
+}
+
+.stripe-title  {
+  margin-top:50px;
+  font-weight:bold;
+  color:black;
+  font-size:35px;
+}
+div .main {
+  padding:0;
+}
+.card-content {
+  background-color:white;
+}

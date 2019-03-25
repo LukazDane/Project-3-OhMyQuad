@@ -4,13 +4,21 @@ from flask import make_response as response
 from forms import WorkoutForm
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from flask_bcrypt import check_password_hash
-
+from peewee import fn
+import os
+import stripe
 import forms 
 import models
 
 DEBUG = True
 PORT = 9000
 
+
+stripe_keys = {
+  'secret_key': os.environ['SECRET_KEY'],
+  'publishable_key': os.environ['PUBLISHABLE_KEY']
+}
+stripe.api_key = stripe_keys['secret_key']
 app = Flask(__name__)
 app.secret_key = 'elsdhfsdlfdsjfkljdslfhjlds'
 
@@ -50,6 +58,33 @@ def index(name=None):
         return redirect(url_for('profile'))
     else: 
         return render_template('landing.html',title="Dashboard", name=name)
+## =======================================================
+## Donations ROUTE
+## =======================================================
+
+@app.route('/donations')
+def donations():
+    return render_template('stripe.html', key=stripe_keys['publishable_key'])
+
+@app.route('/charge', methods=['POST'])
+def charge():
+    # Amount in cents
+    amount = 500
+
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        source=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='usd',
+        description='Flask Charge'
+    )
+
+    return render_template('charge.html', amount=amount)
+
 
 
 ## =======================================================
@@ -104,6 +139,7 @@ def add_workout():
     #form.description.data = workout.description
     return render_template("add_workout.html", user=current_user, form=form, workouts=workouts)
 
+
 @app.route("/profile/")
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
@@ -118,6 +154,7 @@ def profile():
         user = current_user.id)
         return render_template("profile.html", user=current_user, form=form, workouts=workouts)
     return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+
 
 
 ## =======================================================
@@ -237,20 +274,30 @@ def page_not_found(e):
     # return render_template(".html", sub=sub, form=form , posts=posts)
 
 
+    workouts = models.Workout.select()
+    if form.validate_on_submit():
+        models.Workout.create(
+        name=form.name.data.strip(),
+        description=form.description.data.strip(),
+        area= form.description.data.strip(),
+        user = current_user.id)
+        return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    return render_template("profile.html", user=current_user, form=form, workouts=workouts)
+    user_id = int(user)
+    user= models.User.get(models.User.id == user_id)
+    workouts = user.workouts
+
+@app.route('/workouts')
+@app.route('/workouts/<id>',methods=['GET', 'POST'])
+def workout(id=None):
+
+    workout_id = int(id)
+    workout = models.Workout.get(models.Workout.id == workout_id)
+      
+        #flash("New post created")
+    # return redirect("/workouts/{}".format(workout_id))
+    return render_template("workouts.html".format(workout_id))
     
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
@@ -278,7 +325,7 @@ if __name__ == '__main__':
         models.Exercise.create_exercise(
         name='Barbell Squat',
         description="4 sets, 4-6 reps",
-        type='Lats',
+        type='Legs',
        
         ),
         models.Exercise.create_exercise(
@@ -296,13 +343,13 @@ if __name__ == '__main__':
         models.Exercise.create_exercise(
         name='Underhand Cable Pulldowns',
         description="3 sets, 10-12 Reps",
-        type='Legs',
+        type='Triceps',
        
         ),
         models.Exercise.create_exercise(
         name='Close-Grip Bench Press',
         description="4 sets, 6, 6, 8, 10 reps (60-90 seconds rest)",
-        type='Lats',
+        type='Triceps',
        
         ),
         models.Exercise.create_exercise(
@@ -318,5 +365,5 @@ if __name__ == '__main__':
        
         )
     except ValueError:
-        pass
+        raise
     app.run(debug=DEBUG, port=PORT)
