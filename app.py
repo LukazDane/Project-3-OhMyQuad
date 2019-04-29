@@ -14,11 +14,12 @@ DEBUG = True
 PORT = 9000
 
 
-stripe_keys = {
-  'secret_key': os.environ['SECRET_KEY'],
-  'publishable_key': os.environ['PUBLISHABLE_KEY']
-}
-stripe.api_key = stripe_keys['secret_key']
+stripe.api_key = "sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+charge = stripe.Charge.retrieve(
+  "ch_19yUeq2eZvKYlo2CSwbttFrw",
+  api_key="sk_test_4eC39HqLyjWDarjtT1zdp7dc"
+)
+charge.save() # Uses the same API Key.
 app = Flask(__name__)
 app.secret_key = 'elsdhfsdlfdsjfkljdslfhjlds'
 
